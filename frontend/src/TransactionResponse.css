@@ -1,0 +1,49 @@
+.overlay {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #333;
+    z-index: 2; 
+}
+
+.transactionMessageBox {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    height: fit-content;
+    padding: 20px;
+    width: calc(400px - 10px);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    z-index: 1002;
+}
+
+.title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.message {
+    font-size: 17px;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+
+.closeBox {
+    position: absolute;
+    top: 0px;
+    right: 7px;
+    cursor: pointer;
+}

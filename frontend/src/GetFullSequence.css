@@ -1,0 +1,70 @@
+.getSequenceContainer {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  align-items: center;
+}
+
+.getSequenceForm {
+  width: 500px;
+  display: flex;
+  flex-direction: row;
+  height: 30px;
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.getSequenceForm button{
+  background-color: rgb(70, 160, 70);
+  color: white;
+}
+
+.getSequenceForm button:hover {
+  background-color: rgb(59, 134, 59);
+}
+
+
+/* Stile per la tabella */
+table {
+    margin: 0 auto;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  
+  table th, table td {
+    padding: 8px;
+    text-align: center;
+  }
+
+  th:first-child {
+    border-radius: 5px 0 0 5px;
+  }
+
+  th:last-child {
+    border-radius: 0 5px 5px 0;
+  }
+    
+  /* Stile per l'intestazione della tabella */
+  table th {
+    background-color: #ff8800;
+    color: white;
+  }
+  
+  /* Cambia il colore del testo del corpo della tabella se lo desideri */
+  table td {
+    color: #333;
+  }
+
+  table td[name='cid'] a {
+    text-decoration: none;
+    color: #2278f8;
+  }
+
+  table td button {
+    color: white;
+    background-color: rgb(70, 160, 70);
+    width: 95px;
+  }
+
+  

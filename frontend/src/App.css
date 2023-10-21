@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+html {
+    height: 100%;
+    font-family:  'Comfortaa', sans-serif;
+}
+
+button, input{
+    border: none;
+    border-radius: 3px;
+    height: 30px;
+    outline: none;
+    font-family:  'Comfortaa', sans-serif;
+    padding: 0 15px;
+}
+
+button {
+    cursor: pointer;
+}
+
+input {
+    width: calc(100% - 30px);
+    border: solid 1px #c2c2c2;
+}
+
+input:focus {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+    transform: translate(1px, 1px);
+}
+
+body {
+    background-color: #fff;
+    transition: all 0.3s ease-in-out;
+    height: 100%;
+    text-align: center;
+}
+
+.logo-box {
+    display: flex;
+}
+
+.logo {
+    font-size: 20px;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 140px;
+    left: 0;
+    height: 1200px;
+    width: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 2; 
+}
+

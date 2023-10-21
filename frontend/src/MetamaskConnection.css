@@ -1,0 +1,40 @@
+.connectionButton{
+    margin-right: 20px;
+    background-color: #2278f8;    
+    color:white;
+    font-family:  'Comfortaa', sans-serif;
+}
+
+.connectionButton:hover{
+    background-color: #1b61ca;
+}
+
+.logoutButton{
+    margin-right: 20px;
+    background-color: #F8DE22;    
+}
+
+.connectionBox span{
+    font-size: 13px;
+    margin-right: 10px; 
+}
+
+.connectionBox{
+    display: flex;
+    align-items: center;
+}
+
+.languageSelectorBox {
+    display: flex;
+    gap: 5px;
+    margin-right: 20px;
+}
+
+.languageSelectorBox button {
+    width: 30px;
+    padding: 0;
+}
+
+.activeLang{
+    background-color: #ff8800;
+}
