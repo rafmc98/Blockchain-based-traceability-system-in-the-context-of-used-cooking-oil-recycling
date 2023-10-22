@@ -9,6 +9,8 @@ import Regenerarion from './components/Regeneration';
 import Layout from './components/Layout';
 import MetamaskConnection from './components/MetamaskConnection';
 
+import LogoIcon from './LENTE-NEW_Tavola disegno 1.svg';
+
 function App() {
 
   const [account, setAccount] = useState();
@@ -25,6 +27,7 @@ function App() {
     <BrowserRouter>
             <div className="header">
                 <div className='logo-box'>
+                  <img className='logoIcon' src={LogoIcon} alt=''/>
                   <span className='logo'>OilTracker</span>
                   <Layout />
                 </div>
