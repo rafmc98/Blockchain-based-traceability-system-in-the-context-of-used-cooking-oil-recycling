@@ -1,0 +1,22 @@
+.login-button, .signup-button{
+	margin-top: 10px;
+	width: 120px;
+	height: 30px;
+	font-weight: bold;
+	border-radius: 120px;
+	color: white;
+	background-color: #b7ca0e;
+}
+
+.signup-button {
+	margin-top: 20px;
+	color: black;
+	background-color: white;
+}
+
+.right p {
+	color: white;
+	padding: 0 15px;
+	margin-bottom: 20px;
+}
+

@@ -7,19 +7,18 @@ import Home from './components/Home/Home';
 import Transporter from './components/Transporter/Transporter';
 import Regeneration from './components/Regeneration/Regeneration';
 import Layout from './components/Layout/Layout';
-import MetamaskConnection from './components/MetamaskConnection/MetamaskConnection';
+import ProfileBox from './components/ProfileBox/ProfileBox';
 
 
 import SignUp from './components/SignUp/SignUp';
 import LogIn from './components/LogIn/LogIn';
-
-import LogoIcon from './LENTE-NEW_Tavola disegno 1.svg';
+import LogoIcon from './assets/images/LENTE_Tavola disegno 1.svg';
 
 function App() {
 
   const [account, setAccount] = useState();
 
-  const user = localStorage.getItem("token");
+  const user = sessionStorage.getItem("token");
   
   // Define a function to update the account state in Regeneration component
   const updateAccount = (newAccount) => {
@@ -37,15 +36,17 @@ function App() {
             <span className='logo'>OilTracker</span>
             <Layout />
           </div>
-          <MetamaskConnection account={account} updateAccount={updateAccount}/>
+          <ProfileBox account={account} updateAccount={updateAccount}/>
       </div>
       
       <Routes>
-        {user && <>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/transporter" element={<Transporter account={account}/>} />
-          <Route path="/regeneration" element={<Regeneration/>} />
-        </>}
+        {user && 
+          <>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/transporter" element={<Transporter account={account} updateAccount={updateAccount}/>} />
+            <Route path="/regeneration" element={<Regeneration/>} />
+          </>
+        }
         <Route path="/signup" exact element={<SignUp />} />
         <Route path="/login" exact element={<LogIn />} />
         <Route path="/" element={<Navigate replace to="/login" />} />

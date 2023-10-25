@@ -1,0 +1,55 @@
+.connectionButton{
+    color: #2278f8;
+    background: none;
+    font-weight: bold;    
+}
+
+.connectionButton:hover{
+    background-color: #2278f8;    
+    color:white;
+}
+
+.logoutButton {
+    background-color: #F8DE22;    
+}
+
+.connectionBox span{
+    font-size: 15px;
+    margin-right: 10px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px;   
+}
+
+.logout-button {
+    background: none;
+}
+
+.logout-button:hover {
+    color: white;
+    background: rgb(231, 96, 96);
+}
+
+.connectionBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.languageSelectorBox {
+    display: flex;
+    gap: 5px;
+    margin-right: 20px;
+}
+
+.languageSelectorBox button {
+    width: 30px;
+    padding: 0;
+}
+
+.activeLang{
+    background-color: #b7ca0e;
+}

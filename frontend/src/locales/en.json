@@ -26,5 +26,14 @@
     "setPrevRfjPlaceholder": "Enter the previous serial number",
     "getWifPlaceholder": "Enter the serial number of a document", 
     "getSequenceTitle": "Get WIF sequence",
-    "getSequenceButton": "Send"
+    "getSequenceButton": "Send",
+    "hello": "Hello ",
+    "login": "Log In",
+    "new_user": "Are you not registered yet?",
+    "signup": "Sign Up",
+    "welcomeBack": "Welcome Back",
+    "createAccount": "Create Account",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "logout": "Logout"
 }

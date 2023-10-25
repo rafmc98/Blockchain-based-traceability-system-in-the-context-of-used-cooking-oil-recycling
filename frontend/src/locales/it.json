@@ -4,7 +4,7 @@
   "connect": "Per favore connetti il tuo wallet",
   "transporter": "Trasportatore",
   "regeneration": "Rigenerazione",
-  "connectButton": "Connetti",
+  "connectButton": "Connetti wallet",
   "logoutButton": "Esci",
   "storeWif": "Salva WIF",
   "getFirst": "Ottieni il primo WIF",
@@ -26,5 +26,14 @@
   "setPrevRfjPlaceholder": "Inserisci il codice RFJ del documento precedente",
   "getWifPlaceholder": "Inserisci il numero seriale di un documento",
   "getSequenceTitle": "Ottieni sequenza documenti",
-  "getSequenceButton": "Invia"
+  "getSequenceButton": "Invia",
+  "hello": "Ciao ",
+  "login": "Accedi",
+  "new_user": "Non sei ancora registrato?",
+  "signup": "Registrati",
+  "welcomeBack": "Bentornato",
+  "createAccount": "Crea Account",
+  "firstName": "Nome",
+  "lastName": "Cognome",
+  "logout": "Esci"
 }

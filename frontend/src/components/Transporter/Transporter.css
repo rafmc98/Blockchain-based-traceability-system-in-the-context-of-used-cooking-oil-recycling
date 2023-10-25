@@ -1,0 +1,41 @@
+.transporterContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.interactionContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+}
+
+.interactionBox {
+    width: 500px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: fit-content;
+}
+
+.sectionTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.prevRfj {
+    margin-top: 7px;
+}
+
+.uploadBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
