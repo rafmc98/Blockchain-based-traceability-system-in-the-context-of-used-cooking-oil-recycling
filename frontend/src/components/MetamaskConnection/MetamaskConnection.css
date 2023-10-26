@@ -23,6 +23,7 @@
 }
 
 .logout-button {
+    font-weight: bold;
     background: none;
 }
 
@@ -51,5 +52,5 @@
 }
 
 .activeLang{
-    background-color: #b7ca0e;
+    background-color: rgb(91, 201, 91);
 }

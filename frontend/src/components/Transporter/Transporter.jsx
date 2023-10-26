@@ -13,9 +13,10 @@ import Encrypter from '../Encrypter';
 import firstContractABI from '../../contracts/FirstWIfCidStorageABI.json';
 import secondContractABI from '../../contracts/SecondWifCidStorageABI.json';
 
-const Transporter = ({ account, updateAccount }) => {
+const Transporter = () => {
 
   const { t } = useTranslation();
+  const account = sessionStorage.getItem('account');
   
   const [firstWif, setFirstWif] = useState(null);
   const [secondWif, setSecondWif] = useState(null); 

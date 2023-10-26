@@ -52,18 +52,18 @@ const Signup = () => {
 					</Link>
 				</div>
 				<div className='right'>
-				<form className='form-container' onSubmit={handleSubmit}>
-					<p>{t('createAccount')}</p>
-					<input type="text" placeholder={t('firstName')} name="firstName" onChange={handleChange} value={data.firstName} required />
-					<input type="text" placeholder={t('lastName')} name="lastName" onChange={handleChange} value={data.lastName} required />
-					<input type="email" placeholder="Email" name="email" onChange={handleChange} value={data.email} required />
-					<input type="password" placeholder="Password" name="password" onChange={handleChange} value={data.password} required />
-					{error && <div className='error-msg'>{error}</div>}
-					<button type="submit" className='signup-button'>
-						{t('signup')}
-					</button>
-				</form>
-			</div>
+					<form className='form-container' onSubmit={handleSubmit}>
+						<p>{t('createAccount')}</p>
+						<input type="text" placeholder={t('firstName')} name="firstName" onChange={handleChange} value={data.firstName} required />
+						<input type="text" placeholder={t('lastName')} name="lastName" onChange={handleChange} value={data.lastName} required />
+						<input type="email" placeholder="Email" name="email" onChange={handleChange} value={data.email} required />
+						<input type="password" placeholder="Password" name="password" onChange={handleChange} value={data.password} required />
+						{error && <div className='error-msg'>{error}</div>}
+						<button type="submit" className='signup-button'>
+							{t('signup')}
+						</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	);

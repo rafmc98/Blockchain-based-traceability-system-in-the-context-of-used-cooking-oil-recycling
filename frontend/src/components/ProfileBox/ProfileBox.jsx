@@ -8,7 +8,7 @@ import MetamaskConnection from '../MetamaskConnection/MetamaskConnection';
 
 import './ProfileBox.css'
 
-const ProfileBox = ({account, updateAccount}) => {
+const ProfileBox = () => {
 
    const { t } = useTranslation();
 
@@ -22,27 +22,29 @@ const ProfileBox = ({account, updateAccount}) => {
     };
    
    return (
-       <>
-            <div className='profileBox'>
-                <LanguageSelector />
-                { user && 
-                    <div className='dropdown-section'>
-                        <span className='profileInfo' onClick={() => setToggle(!toggle)}>
-                            {t('hello')}{sessionStorage.getItem('name')}
-                        </span>
-                       { toggle && (
-                            <div className='dropdown-content'>
-                                <MetamaskConnection account={account} updateAccount={updateAccount}/>
-                                <p>link to profile</p>
-                                <button onClick={handleLogout} className='logout-button'>
-                                    {t('logout')}
-                                </button>
-                            </div>
-                        )}
-                    </div>
-                }
-            </div>
-       </>
+        <div className='profileBox'>
+            <LanguageSelector />
+            { user && 
+                <div className='dropdown-section'>
+                    <span className={` profileInfo ${toggle ? 'white-background' : ''}`} onClick={() => setToggle(!toggle)}>
+                        {t('hello')}{sessionStorage.getItem('name')} 
+                        <div className={`${toggle ? 'rotate' : ''}`}>
+                            <span className="material-icons">
+                                expand_more
+                            </span>
+                        </div>
+                    </span>
+                    { toggle && (
+                        <div className='dropdown-content'>
+                            <MetamaskConnection />
+                            <button onClick={handleLogout} className='logout-button'>
+                                {t('logout')}
+                            </button>
+                        </div>
+                    )}
+                </div>
+            }
+        </div>
     );
   };
   

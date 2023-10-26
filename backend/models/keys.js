@@ -9,7 +9,7 @@ const keysSchema = new mongoose.Schema({
 
 const Keys = mongoose.model("Keys", keysSchema);
 
-const validateMyTable = (data) => {
+const validateKeys = (data) => {
   const schema = Joi.object({
     email: Joi.string().required().label("Email"),
     publicKey: Joi.string().required().label("Public Key"),
@@ -18,4 +18,4 @@ const validateMyTable = (data) => {
   return schema.validate(data);
 };
 
-module.exports = { MyTable, validateMyTable };
+module.exports = { Keys, validateKeys };

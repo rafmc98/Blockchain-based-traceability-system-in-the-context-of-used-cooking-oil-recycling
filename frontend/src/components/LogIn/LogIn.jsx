@@ -22,6 +22,7 @@ const Login = () => {
 			const { data: res } = await axios.post(url, data);
 			sessionStorage.setItem("token", res.data.token);
 			sessionStorage.setItem("name", res.data.name);
+			sessionStorage.setItem('email', res.data.email);
 			window.location = "/";
 		} catch (error) {
 			if (

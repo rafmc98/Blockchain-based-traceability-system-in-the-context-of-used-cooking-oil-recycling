@@ -2,10 +2,11 @@ import { useTranslation } from 'react-i18next';
 
 import './MetamaskConnection.css';
 
-const MetamaskConnection = ({ account, updateAccount }) => {
+const MetamaskConnection = () => {
 
     const { t } = useTranslation();
     const user = sessionStorage.getItem('token');
+    const account = sessionStorage.getItem('account');
 
     const connectWallet = async () => {
         if (window.ethereum) {
@@ -13,7 +14,6 @@ const MetamaskConnection = ({ account, updateAccount }) => {
                 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         
                 const newAccount = accounts[0];
-                updateAccount(newAccount);
                 sessionStorage.setItem('account', newAccount);
 
             } catch (error) {
@@ -27,8 +27,8 @@ const MetamaskConnection = ({ account, updateAccount }) => {
     }
 
     const disconnectWallet = () => {
-        updateAccount(null);
         sessionStorage.removeItem('account');
+        window.location.reload();
     };
 
     return (
@@ -40,7 +40,7 @@ const MetamaskConnection = ({ account, updateAccount }) => {
                     ): (
                         <>
                             <span>{account}</span>
-                            <button className='logoutButton' onClick={disconnectWallet}>{t('logoutButton')}</button>
+                            <button className='logoutButton' onClick={disconnectWallet}>{t('disconnectButton')}</button>
                         </>    
                     )}
                 </>

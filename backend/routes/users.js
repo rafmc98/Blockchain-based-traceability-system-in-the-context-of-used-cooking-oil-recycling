@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const { User, validate } = require("../models/user");
+const { Keys, validateKeys } = require("../models/keys");
+const { generateKeysPair } = require("../utils/generateKeys");
 const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
@@ -17,7 +19,23 @@ router.post("/", async (req, res) => {
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
 
+		const { publicKey, privateKey } = generateKeysPair();
+
+		const keysData = {
+		  email: req.body.email,
+		  publicKey: publicKey,
+		  privateKey: privateKey,
+		};
+	
+		const { error: keysError } = validateKeys(keysData);
+	
+		if (keysError) {
+		  return res.status(400).send({ message: keysError.details[0].message });
+		}
+	
 		await new User({ ...req.body, password: hashPassword }).save();
+		await new Keys(keysData).save();
+		
 		res.status(201).send({ message: "User created successfully" });
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });

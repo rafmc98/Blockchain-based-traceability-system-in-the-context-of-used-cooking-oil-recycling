@@ -22,8 +22,9 @@ router.post("/", async (req, res) => {
 
 		const token = user.generateAuthToken();
 		const name = user.firstName;
+		const email = user.email;
 		
-		res.status(200).send({ data: {token, name}, message: "logged in successfully" });
+		res.status(200).send({ data: {token, name, email}, message: "logged in successfully" });
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 	}

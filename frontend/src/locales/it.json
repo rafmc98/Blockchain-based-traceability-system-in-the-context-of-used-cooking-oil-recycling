@@ -5,7 +5,7 @@
   "transporter": "Trasportatore",
   "regeneration": "Rigenerazione",
   "connectButton": "Connetti wallet",
-  "logoutButton": "Esci",
+  "disconnectButton": "Disconnetti",
   "storeWif": "Salva WIF",
   "getFirst": "Ottieni il primo WIF",
   "getSecond": "Ottieni il secondo WIF",

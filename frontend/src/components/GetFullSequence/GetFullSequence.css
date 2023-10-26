@@ -16,7 +16,7 @@
 }
 
 .getSequenceForm button{
-  background-color: rgb(70, 160, 70);
+  background-color: rgb(91, 201, 91);
   color: white;
 }
 
@@ -47,7 +47,7 @@ table {
     
   /* Stile per l'intestazione della tabella */
   table th {
-    background-color: #b7ca0e;
+    background-color: rgb(91, 201, 91);
     color: white;
   }
   
@@ -63,7 +63,7 @@ table {
 
   table td button {
     color: white;
-    background-color: rgb(70, 160, 70);
+    background-color: rgb(91, 201, 91);
     width: 95px;
   }
 

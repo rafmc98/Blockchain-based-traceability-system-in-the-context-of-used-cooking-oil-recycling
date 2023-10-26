@@ -5,7 +5,7 @@
     "transporter": "Transporter",
     "regeneration": "Regeneration",
     "connectButton": "Connect wallet",
-    "logoutButton": "Log out",
+    "disconnectButton": "Disconnect",
     "storeWif": "Store WIF",
     "getFirst": "Get first WIF",
     "getSecond": "Get second WIF",

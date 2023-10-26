@@ -1,5 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { React, useState, useEffect } from "react"
+import { React } from "react"
 
 import './App.css';
 
@@ -16,18 +16,8 @@ import LogoIcon from './assets/images/LENTE_Tavola disegno 1.svg';
 
 function App() {
 
-  const [account, setAccount] = useState();
-
   const user = sessionStorage.getItem("token");
-  
-  // Define a function to update the account state in Regeneration component
-  const updateAccount = (newAccount) => {
-      setAccount(newAccount);
-  };
 
-  useEffect(() => {
-    if(account) console.log("Account connected: ", account);
-  }, [account]);
   return (
     <>
       <div className="header">
@@ -36,14 +26,14 @@ function App() {
             <span className='logo'>OilTracker</span>
             <Layout />
           </div>
-          <ProfileBox account={account} updateAccount={updateAccount}/>
+          <ProfileBox />
       </div>
       
       <Routes>
         {user && 
           <>
             <Route path="/" exact element={<Home />} />
-            <Route path="/transporter" element={<Transporter account={account} updateAccount={updateAccount}/>} />
+            <Route path="/transporter" element={<Transporter />} />
             <Route path="/regeneration" element={<Regeneration/>} />
           </>
         }
@@ -52,7 +42,7 @@ function App() {
         <Route path="/" element={<Navigate replace to="/login" />} />
         <Route path="/transporter" element={<Navigate replace to="/login" />} />
         <Route path="/regeneration" element={<Navigate replace to="/login" />} />
-        </Routes>
+      </Routes>
     </>
   );
 }

@@ -12,9 +12,27 @@
     padding: 0 10px;
     height: 30px;
     display: flex;
+    gap: 3px;
     align-items: center;
-    justify-content: center;
-    width: 120px;
+    justify-content: space-evenly;
+    width: fit-content;
+}
+
+.profileInfo span {
+    width: fit-content;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    transition: transform 1s ease;
+}
+
+.white-background {
+    background-color: white;
+    color: black;
+}
+
+.rotate {
+    transform: rotate(180deg);
 }
 
 .profileInfo:hover {
@@ -29,10 +47,11 @@
     align-items: center;
     padding: 10px;
     position: absolute;
-    border-radius: 3px;
-    top: 58px;
+    border-radius: 0 0 3px 3px;
+    top: 56px;
     right: 10px;
-    width: 300px;
+    width: fit-content;
+    max-width: 300px;
     z-index: 1;
     background-color: white;
     color: black;

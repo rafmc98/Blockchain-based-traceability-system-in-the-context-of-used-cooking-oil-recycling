@@ -37,7 +37,7 @@
 
 /* Stile per l'hover sui campi di navigazione */
 .link:hover {
-  color: #b7ca0e; /* Cambia il colore del testo durante l'hover */
+  color: rgb(91, 201, 91); /* Cambia il colore del testo durante l'hover */
   /*text-shadow: 1px 1px 40px rgba(255,255,255,1);*/
   font-weight: bold;
 }
@@ -45,8 +45,8 @@
 /* Stile per il link attivo */
 .activeLink {
   font-weight: bold; /* Grassetto per il link attivo */
-  color: #b7ca0e; /* Colore del testo per il link attivo */
-  box-shadow: 0px -3px 0px 0px #b7ca0e inset;
-  -webkit-box-shadow: 0px -3px 0px 0px #b7ca0e inset;
-  -moz-box-shadow: 0px -3px 0px 0px #b7ca0e inset;
+  color: rgb(91, 201, 91); /* Colore del testo per il link attivo */
+  box-shadow: 0px -3px 0px 0px rgb(91, 201, 91) inset;
+  -webkit-box-shadow: 0px -3px 0px 0px rgb(91, 201, 91) inset;
+  -moz-box-shadow: 0px -3px 0px 0px rgb(91, 201, 91) inset;
 }
