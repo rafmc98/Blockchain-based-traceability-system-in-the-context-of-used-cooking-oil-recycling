@@ -1,0 +1,39 @@
+.formContainer {
+    width: 750px;
+    background-color: rgb(209, 177, 240);
+    padding: 10px;
+}
+
+
+.form-section {
+    padding: 5px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid green;
+    gap: 10px;
+}
+
+.section-title, .group-title {
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.input-small {
+    width: 70px;
+}
+
+.input-medium {
+    width: 200px;
+}
+
+.input-large {
+    width: 290px;
+}

@@ -1,0 +1,103 @@
+<fir:Formulario xmlns:fir="RENTRI-FIR-2021"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="RENTRI-FIR-2021 schema.xsd"
+               xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+               vc:minVersion="1.1">
+    <Versione>1.0</Versione>
+    <IdDocumento>QCFB-000001-H</IdDocumento>
+    <DataCreazione>2023-10-28T10:00:00</DataCreazione>
+    <Autore>
+        <IdSoftware>SoftwareXYZ</IdSoftware>
+        <EmailURI>software@xyz.com</EmailURI>
+        <VersioneSoftware>2.0</VersioneSoftware>
+    </Autore>
+    <DatiFormulario>
+        <DataEmissione>2023-10-28</DataEmissione>
+        <NumeroFormulario>12345</NumeroFormulario>
+        <ProduttoreDetentore>
+            <CodiceFiscale paeseId="IT">ABCCDE12F34G567H</CodiceFiscale>
+            <Denominazione>Azienda XYZ</Denominazione>
+            <Indirizzo>
+                <Paese id="IT"/>
+                <Comune istat="123456"/>
+                <Provincia>MN</Provincia>
+                <Localita>Città</Localita>
+                <Via>Via Roma</Via>
+                <Civico>123</Civico>
+                <CAP>12345</CAP>
+                <NumeroScala/>
+                <NumeroPiano/>
+            </Indirizzo>
+            <Contatto>
+                <Nome>Mario</Nome>
+                <Cognome>Rossi</Cognome>
+                <Telefono>1234567890</Telefono>
+                <Email>mario@azienda.com</Email>
+            </Contatto>
+        </ProduttoreDetentore>
+        <Destinatario>
+            <CodiceFiscale paeseId="IT">XYZABC12D34E567F</CodiceFiscale>
+            <Denominazione>Destinatario Spa</Denominazione>
+            <Indirizzo>
+                <Paese id="IT"/>
+                <Comune istat="654321"/>
+                <Provincia>RM</Provincia>
+                <Localita>Città2</Localita>
+                <Via>Via Milano</Via>
+                <Civico>456</Civico>
+                <CAP>54321</CAP>
+                <NumeroScala/>
+                <NumeroPiano/>
+            </Indirizzo>
+            <Contatto>
+                <Nome>Giovanni</Nome>
+                <Cognome>Bianchi</Cognome>
+                <Telefono>9876543210</Telefono>
+                <Email>giovanni@destinatario.com</Email>
+            </Contatto>
+        </Destinatario>
+        <Trasportatori>
+            <Trasportatore id="1">
+                <CodiceFiscale paeseId="IT">XYZ12345A67B89CDE</CodiceFiscale>
+                <Denominazione>Trasportatore Srl</Denominazione>
+                <Indirizzo>
+                    <Paese id="IT"/>
+                    <Comune istat="111111"/>
+                    <Provincia>NA</Provincia>
+                    <Localita>Città3</Localita>
+                    <Via>Via Napoli</Via>
+                    <Civico>789</Civico>
+                    <CAP>98765</CAP>
+                    <NumeroScala/>
+                    <NumeroPiano/>
+                </Indirizzo>
+                <Contatto>
+                    <Nome>Luca</Nome>
+                    <Cognome>Verdi</Cognome>
+                    <Telefono>1111111111</Telefono>
+                    <Email>luca@trasportatore.com</Email>
+                </Contatto>
+                <AutorizzazioneAlbo>
+                    <NumeroIscrizione>IT-12345</NumeroIscrizione>
+                    <DataIscrizione>2023-01-15</DataIscrizione>
+                </AutorizzazioneAlbo>
+            </Trasportatore>
+        </Trasportatori>
+        <CaratteristicheRifiuto>
+            <CodiceEER>010101</CodiceEER>
+            <DenominazioneEER>Rifiuto Plastica</DenominazioneEER>
+            <DescrizioneRifiuto>Rifiuto plastico riciclabile</DescrizioneRifiuto>
+            <StatoFisico>SP</StatoFisico>
+            <ClassiPericolo>
+                <ClassePericolo>HP01</ClassePericolo>
+            </ClassiPericolo>
+            <NumeroColli>100</NumeroColli>
+            <TipoImballaggio>Pallet</TipoImballaggio>
+            <CaratteristicheChimicoFisiche>Non specificate</CaratteristicheChimicoFisiche>
+        </CaratteristicheRifiuto>
+        <DestinazioneRifiuto>
+            <OperazioneRecupero>R1</OperazioneRecupero>
+            <OperazioneSmaltimento>D1</OperazioneSmaltimento>
+        </DestinazioneRifiuto>
+    </DatiFormulario>
+</fir:Formulario>
