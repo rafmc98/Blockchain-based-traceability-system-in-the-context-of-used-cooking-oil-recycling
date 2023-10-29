@@ -4,6 +4,7 @@
   "connect": "Per favore connetti il tuo wallet",
   "transporter": "Trasportatore",
   "regeneration": "Rigenerazione",
+  "admin": "Admin",
   "connectButton": "Connetti wallet",
   "disconnectButton": "Disconnetti",
   "storeWif": "Salva WIF",

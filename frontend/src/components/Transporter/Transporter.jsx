@@ -5,7 +5,7 @@ import './Transporter.css';
 
 import UploadFile from '../UploadFile/UploadFile';
 import Oracle from '../Oracle/Oracle';
-import GetFullSequence from '../GetFullSequence/GetFullSequence';
+import FirForm from '../FirForm/FirForm';
 import ConnectWalletDisclaimer from '../ConnectWalletDisclaimer/ConnectWalletDisclaimer';
 
 import Encrypter from '../Encrypter';
@@ -74,8 +74,8 @@ const Transporter = () => {
                 />
               </div>
             </div>
-            <Encrypter/>
-            <GetFullSequence/>
+            {/*<Encrypter />*/}
+            <FirForm />
           </div>
         </>
       )}

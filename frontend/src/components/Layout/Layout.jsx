@@ -14,6 +14,8 @@ const Layout = () => {
             <NavLink className={({ isActive }) => (isActive ? "link activeLink" : "link")} to="/transporter" name="transporter">{t('transporter')}</NavLink>
           
             <NavLink className={({ isActive }) => (isActive ? "link activeLink" : "link")} to="/regeneration" name="regeneration">{t('regeneration')}</NavLink>
+
+            <NavLink className={({ isActive }) => (isActive ? "link activeLink" : "link")} to="/admin" name="admin">{t('admin')}</NavLink>
       </div>
 
       <Outlet />

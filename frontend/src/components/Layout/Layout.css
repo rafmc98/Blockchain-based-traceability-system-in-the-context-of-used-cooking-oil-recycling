@@ -17,29 +17,31 @@
 
 .navigation-container {
   height: 56px;
+  width: 495px;
   display: flex;
   align-items: center;
-  justify-content: space-between;  
-  margin-left: 70px;
+  margin-left: 50px;
+  gap: 30px;
 }
 
 /* Stile per i campi di navigazione */
 .link {
-  margin-left: 20px; /* Spaziatura a sinistra tra i campi di navigazione */
+  text-align: center;
   text-decoration: none; /* Rimuove il sottolineato dai campi di navigazione se sono link */
   color: #fff; /* Colore del testo dei campi di navigazione */
   transition: color 0.3s; /* Animazione per il cambiamento di colore durante l'hover */
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 20px;
+  justify-content: center;
+  font-size: 15px;
+  width: 120px;
 }
 
 /* Stile per l'hover sui campi di navigazione */
 .link:hover {
-  color: rgb(91, 201, 91); /* Cambia il colore del testo durante l'hover */
-  /*text-shadow: 1px 1px 40px rgba(255,255,255,1);*/
-  font-weight: bold;
+  color: rgb(91, 201, 91); 
+  font-weight: bold ;
 }
 
 /* Stile per il link attivo */

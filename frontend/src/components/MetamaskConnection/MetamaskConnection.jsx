@@ -15,7 +15,7 @@ const MetamaskConnection = () => {
         
                 const newAccount = accounts[0];
                 sessionStorage.setItem('account', newAccount);
-
+                window.location.reload();
             } catch (error) {
                 console.error('Error requesting Ethereum accounts:', error);
                 return null;

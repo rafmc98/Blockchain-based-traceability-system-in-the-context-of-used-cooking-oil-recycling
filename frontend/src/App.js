@@ -6,10 +6,9 @@ import './App.css';
 import Home from './components/Home/Home';
 import Transporter from './components/Transporter/Transporter';
 import Regeneration from './components/Regeneration/Regeneration';
+import Admin from './components/Admin/Admin';
 import Layout from './components/Layout/Layout';
 import ProfileBox from './components/ProfileBox/ProfileBox';
-
-
 import SignUp from './components/SignUp/SignUp';
 import LogIn from './components/LogIn/LogIn';
 import LogoIcon from './assets/images/LENTE_Tavola disegno 1.svg';
@@ -34,7 +33,8 @@ function App() {
           <>
             <Route path="/" exact element={<Home />} />
             <Route path="/transporter" element={<Transporter />} />
-            <Route path="/regeneration" element={<Regeneration/>} />
+            <Route path="/regeneration" element={<Regeneration />} />
+            <Route path="/admin" element={<Admin />} />
           </>
         }
         <Route path="/signup" exact element={<SignUp />} />
@@ -42,6 +42,7 @@ function App() {
         <Route path="/" element={<Navigate replace to="/login" />} />
         <Route path="/transporter" element={<Navigate replace to="/login" />} />
         <Route path="/regeneration" element={<Navigate replace to="/login" />} />
+        <Route path="/admin" element={<Navigate replace to="/login" />} />
       </Routes>
     </>
   );
