@@ -26,60 +26,60 @@ const Encrypter = () => {
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setSelectedFile(file);
-      };
+    };
     
-      const encryptDocument = () => {
-        if (!selectedFile) {
-          console.error("Seleziona un file da caricare.");
-          return;
-        }
-    
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          const fileContent = e.target.result;
-          try {
-            const key = CryptoJS.enc.Utf8.parse(privateKey); // Converti la chiave privata in un formato utilizzabile
-            const encrypted = CryptoJS.AES.encrypt(fileContent, key, {
-              mode: CryptoJS.mode.ECB,
-            }).toString();
-            setEncryptedDocument(encrypted);
-          } catch (error) {
-            console.error("Errore durante la crittografia:", error);
-          }
-        };
-    
-        reader.readAsText(selectedFile);
-      };
-    
-      const decryptDocument = () => {
+    const encryptDocument = () => {
+      if (!selectedFile) {
+        console.error("Seleziona un file da caricare.");
+        return;
+      }
+  
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const fileContent = e.target.result;
         try {
           const key = CryptoJS.enc.Utf8.parse(privateKey); // Converti la chiave privata in un formato utilizzabile
-          const decrypted = CryptoJS.AES.decrypt(encryptedDocument, key, {
+          const encrypted = CryptoJS.AES.encrypt(fileContent, key, {
             mode: CryptoJS.mode.ECB,
-          }).toString(CryptoJS.enc.Utf8);
-          setDecryptedDocument(decrypted);
+          }).toString();
+          setEncryptedDocument(encrypted);
         } catch (error) {
-          console.error("Errore durante la decriptazione:", error);
+          console.error("Errore durante la crittografia:", error);
         }
       };
+  
+      reader.readAsText(selectedFile);
+    };
+  
+    const decryptDocument = () => {
+      try {
+        const key = CryptoJS.enc.Utf8.parse(privateKey); // Converti la chiave privata in un formato utilizzabile
+        const decrypted = CryptoJS.AES.decrypt(encryptedDocument, key, {
+          mode: CryptoJS.mode.ECB,
+        }).toString(CryptoJS.enc.Utf8);
+        setDecryptedDocument(decrypted);
+      } catch (error) {
+        console.error("Errore durante la decriptazione:", error);
+      }
+    };
 
-      useEffect(() => {
-        if (publicKey !== ''){ 
-            console.log('Chiave Pubblica:', publicKey);
-            console.log('Chiave Private:', privateKey);   
-        }
-    }, [publicKey, privateKey]);
-    
-    return (
-    <div>
-        <button onClick={generateKeyPair}>Create Key Pair</button>
-        <input type="file" onChange={handleFileChange} />
-        <button onClick={encryptDocument}>Crittografa Documento</button>
-        <p>Documento Cifrato: {encryptedDocument}</p>
-        <button onClick={decryptDocument}>Decripta Documento</button>
-        <p>Documento Decriptato: {decryptedDocument}</p>
-    </div>
-    );
+    useEffect(() => {
+      if (publicKey !== ''){ 
+          console.log('Chiave Pubblica:', publicKey);
+          console.log('Chiave Private:', privateKey);   
+      }
+  }, [publicKey, privateKey]);
+  
+  return (
+  <div>
+      <button onClick={generateKeyPair}>Create Key Pair</button>
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={encryptDocument}>Crittografa Documento</button>
+      <p>Documento Cifrato: {encryptedDocument}</p>
+      <button onClick={decryptDocument}>Decripta Documento</button>
+      <p>Documento Decriptato: {decryptedDocument}</p>
+  </div>
+  );
 };
 
 export default Encrypter;

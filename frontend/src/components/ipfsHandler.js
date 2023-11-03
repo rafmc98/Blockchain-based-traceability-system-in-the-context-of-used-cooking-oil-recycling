@@ -1,4 +1,6 @@
 import { create } from "ipfs-http-client";
+import { encrypter } from "./Encrypt";
+import xml2js from 'xml2js';
 
 const ipfsHandler = {
     async storeWif(fileToUpload) {
@@ -13,17 +15,27 @@ const ipfsHandler = {
             },
         });
 
-        const jsonFile = JSON.parse(fileToUpload);
-        const rfj = jsonFile.RFJ;
-    
-        try {
+        let idDoc = '';
+        xml2js.parseString(fileToUpload, (err, result) => {
+            if (err) {
+              console.error("Error parsing XML file:", err);
+            } else {
+              idDoc = result.formData.IdDocumento[0];
+              console.log(idDoc);
+            }
+        });
+       
+        console.log("Encrypting document... ");
+        let fileEncrypted = encrypter.encryptDocument(fileToUpload);
+        
+;       try {
             console.log("Storing Wif on IPFS network");
     
-            const result = await ipfs.add(fileToUpload);
+            const result = await ipfs.add(fileEncrypted);
     
             let params = {
                 ipfsCid: result.path,
-                rfj: rfj
+                rfj: idDoc
             };
     
             console.log("Wif stored on IPFS network: ", {

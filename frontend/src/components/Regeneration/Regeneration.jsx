@@ -1,8 +1,12 @@
+import './Regeneration.css';
 
-const Regenerarion = ({ account }) => {
+const Regenerarion = () => {
    
+
+    
+
     return (
-        <></>
+        <div className="regeneration-container"></div>
     );
   };
   

@@ -1,8 +1,11 @@
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { useTranslation } from 'react-i18next';
 
 import wifTemplate from '../wif.pdf'
 
 const GetPdf = ({ cid }) => {
+
+    const { t } = useTranslation();
 
     async function getFileFromIpfs() {
         try {
@@ -59,7 +62,10 @@ const GetPdf = ({ cid }) => {
       }
 
   return (
-    <button onClick={addTextToPDF}>Get Pdf</button>
+    <>
+      {/*<button onClick={addTextToPDF}>Get Pdf</button>*/}
+      <button>{t('getPdf')}</button>
+    </>
   );
 }
 

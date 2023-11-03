@@ -8,8 +8,6 @@ import Oracle from '../Oracle/Oracle';
 import FirForm from '../FirForm/FirForm';
 import ConnectWalletDisclaimer from '../ConnectWalletDisclaimer/ConnectWalletDisclaimer';
 
-import Encrypter from '../Encrypter';
-
 import firstContractABI from '../../contracts/FirstWIfCidStorageABI.json';
 import secondContractABI from '../../contracts/SecondWifCidStorageABI.json';
 
@@ -20,12 +18,19 @@ const Transporter = () => {
   
   const [firstWif, setFirstWif] = useState(null);
   const [secondWif, setSecondWif] = useState(null); 
+
+  const [document, setDocument] = useState(null);
   const [prevRfj, setPrevRfj] = useState('');
 
 
   const updateFirstWif = (newFileToUpload) => {
     setFirstWif(newFileToUpload);
     console.log("First wif uploaded");
+  }
+
+  const updateDocument = (newFileToUpload) => {
+    setDocument(newFileToUpload);
+    console.log("Document uploaded");
   }
 
   const updateSecondWif = (newFileToUpload) => {
@@ -42,11 +47,11 @@ const Transporter = () => {
       {!account ? (
         <ConnectWalletDisclaimer />
       ) : (
-        <>
-          <div className='transporterContainer'>
+        
+          <div className='transporter-container'>
             <div className='interactionContainer'>
 
-              <div className="interactionBox">
+              {/*<div className="interactionBox">
                 <span className='sectionTitle'>{t('uploadFirst')}</span>
                 <div className='uploadBox'>
                   <UploadFile updateFileToUpload={updateFirstWif}/>
@@ -58,26 +63,34 @@ const Transporter = () => {
                   networkRPC={"https://polygon-mumbai.infura.io/v3/" + process.env.REACT_APP_POLYGON_API_KEY}
                   fileToUpload={firstWif}
                 />
-              </div>
+              </div>*/}
 
               <div className="interactionBox">
-                <span className='sectionTitle'>{t('uploadSecond')}</span>
-                <UploadFile updateFileToUpload={updateSecondWif}/>
-                <input className="prevRfj" type='text' placeholder={t('setPrevRfjPlaceholder')} value={prevRfj} onChange={handleInputChange}/>
+                <span>{t('prevIdDocDescritpion')}</span>
+                <input className="prevIdDocument" type='text' placeholder={t('setPrevRfjPlaceholder')} value={prevRfj} onChange={handleInputChange}/>
+                <span className='sectionTitle'>{t('upload')}</span>
+                <UploadFile updateFileToUpload={updateDocument}/>
                 <Oracle 
-                  contractABI={secondContractABI} 
-                  onChainAddress={process.env.REACT_APP_SECOND_CONTRACT_ADDRESS}
-                  account={account}
-                  networkRPC={"https://polygon-mumbai.infura.io/v3/" + process.env.REACT_APP_POLYGON_API_KEY}
-                  fileToUpload={secondWif}
+                  fileToUpload={document}
                   prevRfj={prevRfj}
+                  t={t}
                 />
               </div>
             </div>
+
+            <div className='divider'>
+              <span className='divider-text'>
+                {t('otherwise')}
+              </span>
+            </div>
+            <span className='sectionTitle'>{t('enterManually')}</span>
+
             {/*<Encrypter />*/}
-            <FirForm />
+            <FirForm 
+              prevRfj={prevRfj}
+              t={t} 
+            />
           </div>
-        </>
       )}
     </>
   );

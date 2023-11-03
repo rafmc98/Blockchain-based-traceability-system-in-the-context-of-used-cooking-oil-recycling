@@ -7,11 +7,19 @@ router.post("/", async (req, res) => {
 		if (!keyPair)
 			return res.status(401).send({ message: "Email invalid" });
 
-		const publicKey = keyPair.publicKey;
 		const privateKey = keyPair.privateKey;
 		
-		res.status(200).send({ data: {publicKey, privateKey}, message: "Encryption keys got succesfully" });
+		res.status(200).send({ data: {privateKey}, message: "Encryption keys got succesfully" });
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
 });
+
+const validate = (data) => {
+	const schema = Joi.object({
+		email: Joi.string().email().required().label("Email"),
+	});
+	return schema.validate(data);
+};
+
+module.exports = router;

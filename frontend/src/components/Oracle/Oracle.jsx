@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import { useTranslation, withTranslation } from 'react-i18next';
 import Web3 from 'web3';
 import { ipfsHandler } from '../ipfsHandler';
+
+import firstContractABI from '../../contracts/FirstWIfCidStorageABI.json';
+import secondContractABI from '../../contracts/SecondWifCidStorageABI.json';
 
 import './Oracle.css';
 
@@ -14,14 +17,15 @@ class Oracle extends Component {
 
     // Initialize properties in the constructor
     this.state = {
-      abi: props.contractABI,
-      onChainAddress: props.onChainAddress,
-      account: props.account,
-      networkRPC: props.networkRPC,
+      firstAbi: firstContractABI,
+      secondAbi: secondContractABI,
+      firstOnChainAddress: process.env.REACT_APP_FIRST_CONTRACT_ADDRESS,
+      secondOnChainAddress: process.env.REACT_APP_SECOND_CONTRACT_ADDRESS,
+      account: sessionStorage.getItem('account'),
       fileToUpload: props.fileToUpload,
       prevRfj: props.prevRfj,
       title: "",
-      showResponse: ""
+      showResponse: "",
     };
 
     // Serve per bindare le funzioni che fanno parte di questa classe
@@ -51,9 +55,16 @@ class Oracle extends Component {
 
   async storeWifCid() {
     if (this.state.fileToUpload !== undefined) {
-      const web3 = new Web3(window.ethereum);
 
-      const contract = new web3.eth.Contract(this.state.abi, this.state.onChainAddress);
+      const web3 = new Web3(window.ethereum);
+      console.log(this.state.firstOnChainAddress);
+      console.log(this.state.secondOnChainAddress)
+      let contract = null;
+      if (!this.state.prevRfj) {
+        contract = new web3.eth.Contract(this.state.firstAbi, this.state.firstOnChainAddress);
+      } else {
+        contract = new web3.eth.Contract(this.state.secondAbi, this.state.secondOnChainAddress);
+      }
 
       const balanceResult = await this.checkBalance(web3, contract); 
       if(balanceResult !== undefined) {
@@ -69,33 +80,40 @@ class Oracle extends Component {
         } 
       } else return
       
-      // TODO: add code to encrypt data
       const result = await ipfsHandler.storeWif(this.state.fileToUpload);
 
       const ipfsCid = result.ipfsCid;
       const rfj = result.rfj;
 
+      console.log(ipfsCid);
+      console.log(rfj);
+
       try {
         let gasEstimate = null;
         let myData = null;
-
-        if (this.state.prevRfj === undefined) {
+        let recipient = null;
+        if (!this.state.prevRfj) {
           gasEstimate = await contract.methods
             .addWif(ipfsCid, rfj)
             .estimateGas({from: this.state.account});
 
           myData = contract.methods.addWif(ipfsCid, rfj).encodeABI();
+          recipient = this.state.firstOnChainAddress;
+
         } else {
+
           gasEstimate = await contract.methods
             .addWifCid(this.state.prevRfj, ipfsCid, rfj)
             .estimateGas({from: this.state.account});
           
           myData = contract.methods.addWifCid(this.state.prevRfj, ipfsCid, rfj).encodeABI();
+          recipient = this.state.secondOnChainAddress;
+
         }
 
         const transaction = await web3.eth.sendTransaction({
           from: this.state.account,
-          to: this.state.onChainAddress,
+          to: recipient,
           gas: gasEstimate,
           data: myData,
         });
@@ -107,7 +125,12 @@ class Oracle extends Component {
           showResponse: this.props.t('wifCidStored')
         });
 
+        this.setState({
+          fileToUpload: null
+        })
+
       } catch (error) {
+        console.log(error);
         this.setState({
           title: this.props.t('transactionFailed'),
           showResponse: error.data.message
@@ -139,7 +162,7 @@ class Oracle extends Component {
       let gasEstimate = null;
 
       // check per quale contratto chiamare
-      if (this.state.prevRfj === undefined) {
+      if (!this.state.prevRfj) {
         gasEstimate = await contract.methods.addWif(placeholderCid, placeholderRfj).estimateGas({
           from: this.state.account
         });
@@ -163,6 +186,7 @@ class Oracle extends Component {
     }
   }
 
+  // Not used anymore
   async getWifCid(rfj) {
     try {
       if (this.state.account) {
@@ -221,7 +245,9 @@ class Oracle extends Component {
     return (
       <div className='oracleBox'>
         { this.state.showResponse && <TransactionResponse title={this.state.title} message={this.state.showResponse}  closeResponseBox={this.closeResponseBox} /> }
-        <button className='storeButton' onClick={this.storeWifCid}>{t('storeWif')}</button>
+        { this.state.fileToUpload && 
+          <button className='storeButton' onClick={this.storeWifCid}>{t('storeWif')}</button>
+        }
       </div>
     );
   }

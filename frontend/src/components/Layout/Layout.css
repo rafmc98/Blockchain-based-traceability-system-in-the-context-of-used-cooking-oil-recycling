@@ -1,18 +1,18 @@
-/* Stile generale per l'header */
 .header {
-  background-color: #333; /* Colore di sfondo dell'header */
-  color: #fff; /* Colore del testo nell'header */
-  display: flex; /* Imposta il layout in linea per allineare i contenuti orizzontalmente */
-  align-items: center; /* Allinea verticalmente i contenuti al centro */
-  justify-content: space-between; /* Distribuisce gli elementi orizzontalmente nello spazio disponibile */
+  width: 100%;
+  background-color: #333; 
+  position: fixed;
+  color: #fff; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-/* Stile per il logo */
 .logo {
-  font-size: 24px; /* Dimensione del testo del logo */
-  font-weight: bold; /* Grassetto per il testo del logo */
-  text-decoration: none; /* Rimuove il sottolineato dal testo del logo se è un link */
-  color: #fff; /* Colore del testo del logo */
+  font-size: 24px; 
+  font-weight: bold; 
+  text-decoration: none; 
+  color: #fff; 
 }
 
 .navigation-container {
@@ -24,12 +24,11 @@
   gap: 30px;
 }
 
-/* Stile per i campi di navigazione */
 .link {
   text-align: center;
-  text-decoration: none; /* Rimuove il sottolineato dai campi di navigazione se sono link */
-  color: #fff; /* Colore del testo dei campi di navigazione */
-  transition: color 0.3s; /* Animazione per il cambiamento di colore durante l'hover */
+  text-decoration: none;  
+  color: #fff; 
+  transition: color 0.3s; 
   height: 100%;
   display: flex;
   align-items: center;
@@ -38,16 +37,16 @@
   width: 120px;
 }
 
-/* Stile per l'hover sui campi di navigazione */
+ 
 .link:hover {
   color: rgb(91, 201, 91); 
   font-weight: bold ;
 }
 
-/* Stile per il link attivo */
+
 .activeLink {
-  font-weight: bold; /* Grassetto per il link attivo */
-  color: rgb(91, 201, 91); /* Colore del testo per il link attivo */
+  font-weight: bold; 
+  color: rgb(91, 201, 91); 
   box-shadow: 0px -3px 0px 0px rgb(91, 201, 91) inset;
   -webkit-box-shadow: 0px -3px 0px 0px rgb(91, 201, 91) inset;
   -moz-box-shadow: 0px -3px 0px 0px rgb(91, 201, 91) inset;

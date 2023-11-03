@@ -8,6 +8,7 @@ import GetPdf from '../GetPdf'
 import firstContractABI from '../../contracts/FirstWIfCidStorageABI.json';
 import secondContractABI from '../../contracts/SecondWifCidStorageABI.json';
 import { useTranslation } from 'react-i18next';
+import GetXml from '../GetXml';
 
 const GetFullSequence = () => {
 
@@ -26,10 +27,10 @@ const GetFullSequence = () => {
         const firstContract = new web3.eth.Contract(firstContractABI, process.env.REACT_APP_FIRST_CONTRACT_ADDRESS);
         const secondContract = new web3.eth.Contract(secondContractABI, process.env.REACT_APP_SECOND_CONTRACT_ADDRESS);
         
-        const rfjObj = await getRfjInfo(firstContract, secondContract)
+        const rfjObj = await getRfjInfo(firstContract, secondContract);
 
-        const index = rfjObj[0]
-        const cid = rfjObj[1]
+        const index = rfjObj[0];
+        const cid = rfjObj[1];
         const resultRfj = rfjObj[2];
 
         let tempCidSequence = new Array(3);
@@ -40,7 +41,6 @@ const GetFullSequence = () => {
                 tempCidSequence[0] = cid
                 tempRfjSequence[0] = rfj
                 const secondRfj = await secondContract.methods.getNextRfj(rfj).call()
-                console.log(secondRfj);
                 if (secondRfj) { 
                     const result = await secondContract.methods.getWifInfo(secondRfj).call()
                     tempCidSequence[1] = result[1]
@@ -67,7 +67,6 @@ const GetFullSequence = () => {
         if (result) { return [1, result, null] }
 
         result = await secondContract.methods.getWifInfo(rfj).call();
-        console.log(result);
         if (result[0] !== '') { return [2, result[1], result[0]] }
         else { alert("Il codice Rfj non corrisponde ad alcun documento memorizzato")}
 
@@ -81,7 +80,7 @@ const GetFullSequence = () => {
                 <a href={`https://ipfs.io/ipfs/${cid}`}>{cid}</a>
             </td>
             <td><GetPdf cid={cid}/></td>
-            <td><button>Get Json</button></td>
+            <td><GetXml cid={cid}/></td>
         </tr>
     ))
    
@@ -96,8 +95,8 @@ const GetFullSequence = () => {
                 <table>
                 <thead>
                     <tr>
+                        <th>ID DOC</th>
                         <th>CID</th>
-                        <th>RFJ</th>
                         <th></th>
                         <th></th>
                     </tr>

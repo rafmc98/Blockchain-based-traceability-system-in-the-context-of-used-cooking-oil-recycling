@@ -1,8 +1,5 @@
 .login-container, .signup-container {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	margin-top: 50px;	
 }
 
 .login-form-container, .signup-form-container {

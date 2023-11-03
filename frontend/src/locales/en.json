@@ -1,6 +1,6 @@
 {
     "welcome": "Welcome to OilTracker",
-    "about": "Safely trace the journey of used cooking oils with the power of blockchain technology.",
+    "about": "Safely trace the journey of used vegetable oils with the power of blockchain technology.",
     "connect": "Please connect your wallet",
     "transporter": "Transporter",
     "regeneration": "Regeneration",
@@ -11,6 +11,7 @@
     "getFirst": "Get first WIF",
     "getSecond": "Get second WIF",
     "send": "Send",
+    "upload": "Upload WIF",
     "uploadFirst": "First WIF uploader",
     "uploadSecond": "Second WIF uploader",
     "uploadFileInfo": "Drag and drop the file or click to select",
@@ -23,8 +24,9 @@
     "error": "Error",
     "wrongRfj": "The RFJ code entered does not correspond to any stored file",
     "linkToWif" : "Link to WIF document",
+    "prevIdDocDescritpion": "Enter the code from the previous document if it exists",
     "prevRfj": "Previous Rfj: ",
-    "setPrevRfjPlaceholder": "Enter the previous serial number",
+    "setPrevRfjPlaceholder": "Previous document id",
     "getWifPlaceholder": "Enter the serial number of a document", 
     "getSequenceTitle": "Get WIF sequence",
     "getSequenceButton": "Send",
@@ -36,5 +38,13 @@
     "createAccount": "Create Account",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "logout": "Logout"
+    "logout": "Logout",
+    "otherwise": "Otherwise",
+    "enterManually": "Enter WIF data manually",
+    "footer": "Copyright © 2023 OilTracker. All rights reserved.",
+    "generatedId": "Id of the WIF generated: ",
+    "previousLinked": "Previous linked document: ",
+    "firGeneratedTitle": "WIF generated",
+    "getXml": "Get XML",
+    "getPdf": "Get PDF"
 }

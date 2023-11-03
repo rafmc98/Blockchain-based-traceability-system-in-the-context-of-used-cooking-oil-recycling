@@ -3,8 +3,8 @@ const Joi = require("joi");
 
 const keysSchema = new mongoose.Schema({
   email: {type: String, required: true, unique:true },
-  publicKey: { type: String, required: true, unique: true },
-  privateKey: { type: String, required: true, unique: true },
+  publicKey: { type: String, required: true },
+  privateKey: { type: String, required: true },
 });
 
 const Keys = mongoose.model("Keys", keysSchema);

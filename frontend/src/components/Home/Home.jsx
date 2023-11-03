@@ -7,12 +7,12 @@ const Home = () => {
    const { t } = useTranslation();
    
    return (
-       <>
+       <div className='home-container'>
             <div className="welcome-message">{t('welcome')}</div>
             <div className="description">
                {t('about')}
             </div>
-       </>
+       </div>
     );
   };
   

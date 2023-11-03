@@ -12,9 +12,12 @@ import ProfileBox from './components/ProfileBox/ProfileBox';
 import SignUp from './components/SignUp/SignUp';
 import LogIn from './components/LogIn/LogIn';
 import LogoIcon from './assets/images/LENTE_Tavola disegno 1.svg';
+import { useTranslation } from 'react-i18next';
 
 function App() {
 
+  const { t } = useTranslation();
+  
   const user = sessionStorage.getItem("token");
 
   return (
@@ -44,6 +47,13 @@ function App() {
         <Route path="/regeneration" element={<Navigate replace to="/login" />} />
         <Route path="/admin" element={<Navigate replace to="/login" />} />
       </Routes>
+        <div>
+
+        </div>
+
+        <footer>
+          <p>{t("footer")}</p>
+        </footer>
     </>
   );
 }

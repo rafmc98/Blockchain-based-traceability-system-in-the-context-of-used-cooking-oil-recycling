@@ -47,7 +47,7 @@ table {
     
   /* Stile per l'intestazione della tabella */
   table th {
-    background-color: rgb(91, 201, 91);
+    background-color: #747272;
     color: white;
   }
   
@@ -63,7 +63,7 @@ table {
 
   table td button {
     color: white;
-    background-color: rgb(91, 201, 91);
+    background-color: #ec9838;
     width: 95px;
   }
 
