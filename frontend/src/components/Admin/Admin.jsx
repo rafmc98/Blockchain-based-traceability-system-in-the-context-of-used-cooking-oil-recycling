@@ -2,7 +2,6 @@ import './Admin.css';
 import GetFullSequence from '../GetFullSequence/GetFullSequence';
 import ConnectWalletDisclaimer from '../ConnectWalletDisclaimer/ConnectWalletDisclaimer';
 
-
 const Admin = () => {
    
     const account = sessionStorage.getItem('account');
@@ -14,7 +13,7 @@ const Admin = () => {
             ) : (
                 <div className='admin-container'>
                     <GetFullSequence/>
-                </div>
+                </div>                
             )}
         </>
     );

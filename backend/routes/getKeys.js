@@ -8,8 +8,9 @@ router.post("/", async (req, res) => {
 			return res.status(401).send({ message: "Email invalid" });
 
 		const privateKey = keyPair.privateKey;
+		const publicKey = keyPair.publicKey;
 		
-		res.status(200).send({ data: {privateKey}, message: "Encryption keys got succesfully" });
+		res.status(200).send({ data: {publicKey, privateKey}, message: "Encryption keys got succesfully" });
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
