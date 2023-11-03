@@ -11,8 +11,7 @@ const GetXml = ({ cid }) => {
         try {
             const email = sessionStorage.getItem('email');
 			const url = "http://localhost:8080/api/getKeys";
-            console.log(email);
-			const { data: res } = await axios.post(url, email);
+			const { data: res } = await axios.post(url, {email: email});
 			console.log(res.data.privateKey);
             return res.data.privateKey;
 		} catch (error) {
@@ -26,7 +25,11 @@ const GetXml = ({ cid }) => {
             const fileContent = await response.text();
             console.log(fileContent);
 
-            const privateKey = getDecriptionKey();
+            const privateKey = await getDecriptionKey();
+
+            const decrypted = encrypter.decryptDocument(privateKey, fileContent);
+
+            console.log(decrypted);
 
         } catch (error) {
             console.error('Error displaying file from IPFS:', error);
