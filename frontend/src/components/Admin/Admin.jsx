@@ -1,6 +1,9 @@
 import './Admin.css';
 import GetFullSequence from '../GetFullSequence/GetFullSequence';
 import ConnectWalletDisclaimer from '../ConnectWalletDisclaimer/ConnectWalletDisclaimer';
+import Crypto from '../Crypto';
+import Codifica from '../Codifica';
+import Encrypter from '../Encrypter';
 
 const Admin = () => {
    
@@ -12,6 +15,7 @@ const Admin = () => {
                 <ConnectWalletDisclaimer />
             ) : (
                 <div className='admin-container'>
+                    <Codifica/>
                     <GetFullSequence/>
                 </div>                
             )}

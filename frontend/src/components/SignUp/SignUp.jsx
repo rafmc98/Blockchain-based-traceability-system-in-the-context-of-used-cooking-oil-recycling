@@ -35,6 +35,7 @@ const Signup = () => {
 				error.response.status >= 400 &&
 				error.response.status <= 500
 			) {
+				console.log(error.response.data.publicKey);
 				setError(error.response.data.message);
 			}
 		}

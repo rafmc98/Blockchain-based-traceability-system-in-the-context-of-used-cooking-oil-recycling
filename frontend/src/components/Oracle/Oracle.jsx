@@ -57,8 +57,6 @@ class Oracle extends Component {
     if (this.state.fileToUpload !== undefined) {
 
       const web3 = new Web3(window.ethereum);
-      console.log(this.state.firstOnChainAddress);
-      console.log(this.state.secondOnChainAddress)
       let contract = null;
       if (!this.state.prevRfj) {
         contract = new web3.eth.Contract(this.state.firstAbi, this.state.firstOnChainAddress);
@@ -84,10 +82,7 @@ class Oracle extends Component {
 
       const ipfsCid = result.ipfsCid;
       const rfj = result.rfj;
-
-      console.log(ipfsCid);
-      console.log(rfj);
-
+      
       try {
         let gasEstimate = null;
         let myData = null;

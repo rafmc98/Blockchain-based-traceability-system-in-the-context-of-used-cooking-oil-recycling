@@ -42,6 +42,7 @@ const Encrypter = () => {
           const encrypted = CryptoJS.AES.encrypt(fileContent, key, {
             mode: CryptoJS.mode.ECB,
           }).toString();
+          console.log(encrypted);
           setEncryptedDocument(encrypted);
         } catch (error) {
           console.error("Errore durante la crittografia:", error);
