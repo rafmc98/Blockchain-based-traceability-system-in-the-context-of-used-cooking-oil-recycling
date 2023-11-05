@@ -1,5 +1,5 @@
 import { create } from "ipfs-http-client";
-import { encrypter } from "./Encrypt";
+import { encrypter } from "./Encrypter";
 import xml2js from 'xml2js';
 
 const ipfsHandler = {
@@ -26,7 +26,9 @@ const ipfsHandler = {
         });
        
         console.log("Encrypting document... ");
-        let fileEncrypted = encrypter.encryptDocument(fileToUpload);
+        console.log(fileToUpload);
+        let fileEncrypted = await encrypter.encryptDocument(fileToUpload);
+        console.log(fileEncrypted);
         
 ;       try {
             console.log("Storing Wif on IPFS network");

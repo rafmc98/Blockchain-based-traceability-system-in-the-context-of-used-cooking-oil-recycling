@@ -30,6 +30,7 @@ const Transporter = () => {
 
   const updateDocument = (newFileToUpload) => {
     setDocument(newFileToUpload);
+    console.log(process.env.REACT_APP_ENCRYPTION_PUBLIC_KEY)
     console.log("Document uploaded");
   }
 

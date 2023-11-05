@@ -1,86 +1,94 @@
-import { useState, useEffect } from "react";
+import xml2js from 'xml2js';
+import forge from 'node-forge';
+import FileSaver from 'file-saver';
 
-import CryptoJS from "crypto-js";
+class Encrypter {
+  constructor() {
+    this.publicKeyObj = forge.pki.publicKeyFromPem(process.env.REACT_APP_ENCRYPTION_PUBLIC_KEY);
+  }
 
-const Encrypter = () => {
-
-    const [publicKey, setPublicKey] = useState('');
-    const [privateKey, setPrivateKey] = useState('');
-
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [encryptedDocument, setEncryptedDocument] = useState("");
-    const [decryptedDocument, setDecryptedDocument] = useState("");
-
-    const [textToEncrypt, setTextToEncrypt] = useState('');
-    const [encryptedText, setEncryptedText] = useState('');
-
-    const generateKeyPair = () => {
-        
-        const newPrivateKey = CryptoJS.lib.WordArray.random(128).toString();
-        const newPublicKey = CryptoJS.lib.WordArray.random(128).toString();
-
-        setPrivateKey(newPrivateKey);
-        setPublicKey(newPublicKey);
-    };
-
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        setSelectedFile(file);
-    };
-    
-    const encryptDocument = () => {
-      if (!selectedFile) {
-        console.error("Seleziona un file da caricare.");
-        return;
+  encryptDocument = async function (fileToUpload) {
+    let encryptedXmlString = '';
+    xml2js.parseString(fileToUpload, (err, result) => {
+      if (err) {
+        console.error("Error parsing XML string:", err);
+      } else {
+        const encryptedData = this.recursiveEncrypt(result.formData);
+        const newXML = { formData: encryptedData };
+        const builder = new xml2js.Builder();
+        encryptedXmlString = builder.buildObject(newXML);
+        console.log(encryptedXmlString);
       }
-  
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const fileContent = e.target.result;
-        try {
-          const key = CryptoJS.enc.Utf8.parse(privateKey); // Converti la chiave privata in un formato utilizzabile
-          const encrypted = CryptoJS.AES.encrypt(fileContent, key, {
-            mode: CryptoJS.mode.ECB,
-          }).toString();
-          console.log(encrypted);
-          setEncryptedDocument(encrypted);
-        } catch (error) {
-          console.error("Errore durante la crittografia:", error);
+    });
+    return encryptedXmlString;
+  }
+
+  decryptDocument = async function (privateKey, encryptedDocument) {
+    let decryptedData = '';
+    xml2js.parseString(encryptedDocument, (err, result) => {
+      if (err) {
+        console.error("Error parsing XML file:", err);
+      } else {
+        const privateKeyObj = forge.pki.privateKeyFromPem(privateKey);
+        decryptedData = this.recursiveDecrypt(result.formData, privateKeyObj);
+      }
+    });
+    return decryptedData;
+  }
+
+  recursiveEncrypt(obj) {
+    const encryptedData = {};
+
+    for (const field in obj) {
+      if (obj.hasOwnProperty(field)) {
+        if (typeof obj[field][0] === 'object') {
+          encryptedData[field] = this.recursiveEncrypt(obj[field][0]);
+        } else {
+          let value = obj[field][0];
+          if (value){
+            value = this.publicKeyObj.encrypt(value, "RSA-OAEP");
+            encryptedData[field] = forge.util.encode64(value);
+          } else {
+            encryptedData[field] = '';
+          }
         }
-      };
-  
-      reader.readAsText(selectedFile);
-    };
-  
-    const decryptDocument = () => {
-      try {
-        const key = CryptoJS.enc.Utf8.parse(privateKey); // Converti la chiave privata in un formato utilizzabile
-        const decrypted = CryptoJS.AES.decrypt(encryptedDocument, key, {
-          mode: CryptoJS.mode.ECB,
-        }).toString(CryptoJS.enc.Utf8);
-        setDecryptedDocument(decrypted);
-      } catch (error) {
-        console.error("Errore durante la decriptazione:", error);
       }
-    };
+    }
 
-    useEffect(() => {
-      if (publicKey !== ''){ 
-          console.log('Chiave Pubblica:', publicKey);
-          console.log('Chiave Private:', privateKey);   
+    return encryptedData;
+  }
+
+  recursiveDecrypt(obj, privateKeyObj) {
+    const decryptedData = {};
+
+    for (const field in obj) {
+      if (obj.hasOwnProperty(field)) {
+        if (typeof obj[field][0] === 'object') {
+          decryptedData[field] = this.recursiveDecrypt(obj[field][0], privateKeyObj);
+        } else {
+          let value = obj[field][0];
+          if (value) {
+            value = forge.util.decode64(value);
+            value = privateKeyObj.decrypt(value, 'RSA-OAEP');
+          }
+          decryptedData[field] = value;
+        }
       }
-  }, [publicKey, privateKey]);
-  
-  return (
-  <div>
-      <button onClick={generateKeyPair}>Create Key Pair</button>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={encryptDocument}>Crittografa Documento</button>
-      <p>Documento Cifrato: {encryptedDocument}</p>
-      <button onClick={decryptDocument}>Decripta Documento</button>
-      <p>Documento Decriptato: {decryptedDocument}</p>
-  </div>
-  );
-};
+    }
+    return decryptedData;
+  }
 
-export default Encrypter;
+  saveXML(xmlString) {
+    if (xmlString) {
+      const newXML = { formData: xmlString };
+      const builder = new xml2js.Builder();
+      const xml = builder.buildObject(newXML);
+      const blob = new Blob([xml], { type: 'application/xml' });
+      FileSaver.saveAs(blob, 'fir.xml');
+    }
+  }
+}
+
+const encrypter = new Encrypter();
+
+export { encrypter };

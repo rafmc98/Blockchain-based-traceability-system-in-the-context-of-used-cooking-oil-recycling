@@ -820,7 +820,7 @@ class FirForm extends Component {
                 defaultValue={this.state.formData.DatiFormulario.DatiAccettazione.AccettazioneCompleta || 'A'}
                 onChange={this.handleChange}
               >
-                <option value="" disabled selected>Accettazione Rifiuto</option>
+                <option value="" disabled>Accettazione Rifiuto</option>
                 <option value="A">Accettato per intero</option>
                 <option value="AP">Accettato parzialmente</option>
                 <option value="R">Respinto</option>

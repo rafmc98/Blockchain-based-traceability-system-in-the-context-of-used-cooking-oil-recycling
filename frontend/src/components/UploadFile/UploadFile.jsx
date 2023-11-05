@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import xml2js from 'xml2js'
 
 import './UploadFile.css';
 import { useTranslation } from 'react-i18next';
 
-const UploadFile = ({updateFileToUpload }) => {
+const UploadFile = ({ updateFileToUpload }) => {
 
   const [filePreview, setFilePreview] = useState(null);
 
@@ -38,22 +37,21 @@ const UploadFile = ({updateFileToUpload }) => {
   }
 
   return (
-    <>
-      <div id="drop_file_zone">
-        <input type="file" id="selectFile" accept=".xml"/>
-        <div id="drag_upload_file" onDragOver={dragOverHandler} onDrop={dropHandler} onClick={selectFileHandler}>
-          { filePreview ? (
-            <span className='filePreview'>
-              {filePreview}
-            </span>
-          ):(
-            <span className="roboto-regular">
-              {t('uploadFileInfo')}
-            </span>
-          )}
-        </div>
+    <div id="drop_file_zone">
+      <input type="file" id="selectFile" accept=".xml"/>
+      <div id="drag_upload_file" onDragOver={dragOverHandler} onDrop={dropHandler} onClick={selectFileHandler}>
+        { filePreview ? (
+          <span className='filePreview'>
+            {filePreview}
+          </span>
+        ):(
+          <span className="roboto-regular">
+            {t('uploadFileInfo')}
+          </span>
+        )}
       </div>
-    </>
+    </div>
+    
   );
 };
   
