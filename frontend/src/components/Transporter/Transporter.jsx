@@ -85,8 +85,6 @@ const Transporter = () => {
               </span>
             </div>
             <span className='sectionTitle'>{t('enterManually')}</span>
-
-            {/*<Encrypter />*/}
             <FirForm 
               prevRfj={prevRfj}
               t={t} 
