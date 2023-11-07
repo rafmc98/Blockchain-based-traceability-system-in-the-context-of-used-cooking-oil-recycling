@@ -5,6 +5,7 @@ import './Regeneration.css';
 import ConnectWalletDisclaimer from '../ConnectWalletDisclaimer/ConnectWalletDisclaimer';
 import UploadFile from '../UploadFile/UploadFile';
 import RegenerationOracle from '../RegenerationOracle/RegenerationOracle';
+import RegenerationDocForm from '../RegenerationDocForm/RegenerationDocForm';
 
 const Regenerarion = () => {
    
@@ -34,11 +35,21 @@ const Regenerarion = () => {
                 <input className="prevIdDocument" type='text' placeholder={t('setPrevRfjPlaceholder')} value={prevRfj} onChange={handleInputChange}/>
                 <span className='sectionTitle'>{t('upload-transport')}</span>
                 <UploadFile updateFileToUpload={updateDocument}/>
-
                 <RegenerationOracle 
                     fileToUpload={document}
                     prevRfj={prevRfj}
                     t={t}
+                />
+
+                <div className='divider'>
+                    <span className='divider-text'>
+                        {t('otherwise')}
+                    </span>
+                </div>
+                <span className='sectionTitle'>{t('enterManually')}</span>
+                <RegenerationDocForm 
+                    prevRfj={prevRfj}
+                    t={t} 
                 />
             </div>
         )}

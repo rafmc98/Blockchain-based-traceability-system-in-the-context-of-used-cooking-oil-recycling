@@ -7,6 +7,7 @@ import GetPdf from '../GetPdf'
 
 import firstContractABI from '../../contracts/FirstWIfCidStorageABI.json';
 import secondContractABI from '../../contracts/SecondWifCidStorageABI.json';
+import thirdContractABI from '../../contracts/ThirdRegenerationCidStorageABI.json'
 import { useTranslation } from 'react-i18next';
 import GetXml from '../GetXml';
 
@@ -26,8 +27,14 @@ const GetFullSequence = () => {
         const web3 = new Web3(window.ethereum);
         const firstContract = new web3.eth.Contract(firstContractABI, process.env.REACT_APP_FIRST_CONTRACT_ADDRESS);
         const secondContract = new web3.eth.Contract(secondContractABI, process.env.REACT_APP_SECOND_CONTRACT_ADDRESS);
+
+
+        console.log(process.env.REACT_APP_THIRD_CONTRACT_ADDRESS);
+        const thirdContract = new web3.eth.Contract(thirdContractABI, process.env.REACT_APP_THIRD_CONTRACT_ADDRESS);
         
-        const rfjObj = await getRfjInfo(firstContract, secondContract);
+        const rfjObj = await getIdInfo(firstContract, secondContract, thirdContract);
+
+        console.log(rfjObj);
 
         const index = rfjObj[0];
         const cid = rfjObj[1];
@@ -36,15 +43,25 @@ const GetFullSequence = () => {
         let tempCidSequence = new Array(3);
         let tempRfjSequence = new Array(3);
 
+        let result = null
+        let secondRfj = null
+        let thirdIdDoc = null
         switch (index) {
             case 1:
                 tempCidSequence[0] = cid
                 tempRfjSequence[0] = rfj
-                const secondRfj = await secondContract.methods.getNextRfj(rfj).call()
+                secondRfj = await secondContract.methods.getNextRfj(rfj).call()
                 if (secondRfj) { 
-                    const result = await secondContract.methods.getWifInfo(secondRfj).call()
+                    result = await secondContract.methods.getWifInfo(secondRfj).call()
                     tempCidSequence[1] = result[1]
                     tempRfjSequence[1] = secondRfj
+                }
+
+                thirdIdDoc = await thirdContract.methods.getNextIdDoc(secondRfj).call()
+                if (thirdIdDoc) {
+                    result = await thirdContract.methods.getRegenerationInfo(thirdIdDoc).call()
+                    tempCidSequence[2] = result[1]
+                    tempRfjSequence[2] = thirdIdDoc
                 }
                 break;
             case 2:
@@ -52,7 +69,27 @@ const GetFullSequence = () => {
                 tempRfjSequence[1] = rfj
                 tempCidSequence[0] = await firstContract.methods.getWifInfo(resultRfj).call()
                 tempRfjSequence[0] = resultRfj
-              break;
+
+                thirdIdDoc = await thirdContract.methods.getNextIdDoc(rfj).call()
+                if (thirdIdDoc) {
+                    result = await thirdContract.methods.getRegenerationInfo(thirdIdDoc).call()
+                    tempCidSequence[2] = result[1]
+                    tempRfjSequence[2] = thirdIdDoc
+                }
+                break;
+            case 3:
+                tempCidSequence[2] = cid
+                tempRfjSequence[2] = rfj
+
+                result = await secondContract.methods.getWifInfo(resultRfj).call()
+                tempCidSequence[1] = result[1]
+                tempRfjSequence[1] = resultRfj
+                let firstRfj = result[0]
+
+                result = await firstContract.methods.getWifInfo(firstRfj).call()
+                tempCidSequence[0] = result[1]
+                tempRfjSequence[0] = firstRfj
+                break;
             default:
                 console.log("Il codice Rfj non esiste");
         }
@@ -62,14 +99,17 @@ const GetFullSequence = () => {
         setRfjSequence(tempRfjSequence);
     }
     
-    const getRfjInfo = async (firstContract, secondContract) => {
+    const getIdInfo = async (firstContract, secondContract, thirdContract) => {
         let result = await firstContract.methods.getWifInfo(rfj).call();
         if (result) { return [1, result, null] }
 
         result = await secondContract.methods.getWifInfo(rfj).call();
         if (result[0] !== '') { return [2, result[1], result[0]] }
-        else { alert("Il codice Rfj non corrisponde ad alcun documento memorizzato")}
 
+        result = await thirdContract.methods.getRegenerationInfo(rfj).call();
+        if (result[0] !== '') { return [3, result[1], result[0]] }
+        
+        else { alert("Il codice Rfj non corrisponde ad alcun documento memorizzato")}
         return [-1, null, null]
     }
 
@@ -93,18 +133,18 @@ const GetFullSequence = () => {
             </div>
             {cidSequence[0] && (
                 <table>
-                <thead>
-                    <tr>
-                        <th>ID DOC</th>
-                        <th>CID</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {renderSequence}
-                </tbody>
-            </table>
+                    <thead>
+                        <tr>
+                            <th>ID DOC</th>
+                            <th>CID</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {renderSequence}
+                    </tbody>
+                </table>
             )}
         </div>
     );
