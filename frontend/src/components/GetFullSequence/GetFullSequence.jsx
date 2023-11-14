@@ -27,14 +27,9 @@ const GetFullSequence = () => {
         const web3 = new Web3(window.ethereum);
         const firstContract = new web3.eth.Contract(firstContractABI, process.env.REACT_APP_FIRST_CONTRACT_ADDRESS);
         const secondContract = new web3.eth.Contract(secondContractABI, process.env.REACT_APP_SECOND_CONTRACT_ADDRESS);
-
-
-        console.log(process.env.REACT_APP_THIRD_CONTRACT_ADDRESS);
         const thirdContract = new web3.eth.Contract(thirdContractABI, process.env.REACT_APP_THIRD_CONTRACT_ADDRESS);
         
         const rfjObj = await getIdInfo(firstContract, secondContract, thirdContract);
-
-        console.log(rfjObj);
 
         const index = rfjObj[0];
         const cid = rfjObj[1];
@@ -56,8 +51,9 @@ const GetFullSequence = () => {
                     tempCidSequence[1] = result[1]
                     tempRfjSequence[1] = secondRfj
                 }
-
+                console.log("errore qui");
                 thirdIdDoc = await thirdContract.methods.getNextIdDoc(secondRfj).call()
+                console.log("errore")
                 if (thirdIdDoc) {
                     result = await thirdContract.methods.getRegenerationInfo(thirdIdDoc).call()
                     tempCidSequence[2] = result[1]
