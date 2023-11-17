@@ -9,7 +9,7 @@ import firstContractABI from '../../contracts/FirstWIfCidStorageABI.json';
 import secondContractABI from '../../contracts/SecondWifCidStorageABI.json';
 import thirdContractABI from '../../contracts/ThirdRegenerationCidStorageABI.json'
 import { useTranslation } from 'react-i18next';
-import GetXml from '../GetXml';
+import { ipfsHandler } from '../ipfsHandler';
 
 const GetFullSequence = () => {
 
@@ -116,7 +116,9 @@ const GetFullSequence = () => {
                 <a href={`https://ipfs.io/ipfs/${cid}`}>{cid}</a>
             </td>
             <td><GetPdf cid={cid}/></td>
-            <td><GetXml cid={cid}/></td>
+            <td>
+                <button onClick={() => ipfsHandler.getFileFromIpfs(cid)}>{t('getXml')}</button>
+            </td>
         </tr>
     ))
    

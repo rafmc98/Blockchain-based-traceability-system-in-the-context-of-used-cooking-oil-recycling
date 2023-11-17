@@ -1,6 +1,9 @@
 import { create } from "ipfs-http-client";
-import { encrypter } from "./Encrypter";
+import { cryptographyHandler } from "./CryptographyHandler";
 import xml2js from 'xml2js';
+import axios from "axios";
+import { saveAs } from 'file-saver';
+
 
 const ipfsHandler = {
     async storeWif(fileToUpload) {
@@ -27,10 +30,10 @@ const ipfsHandler = {
        
         console.log("Encrypting document... ");
         console.log(fileToUpload);
-        let fileEncrypted = await encrypter.encryptDocument(fileToUpload);
+        let fileEncrypted = await cryptographyHandler.encryptDocument(fileToUpload);
         console.log(fileEncrypted);
-        
-;       try {
+               
+        try {
             console.log("Storing Wif on IPFS network");
     
             const result = await ipfs.add(fileEncrypted);
@@ -52,7 +55,32 @@ const ipfsHandler = {
         } catch (error) {
             console.log(error);
         }
-    }    
+    },
+
+    async getFileFromIpfs(cid) {
+        try {
+            const response = await fetch(`https://ipfs.io/ipfs/${cid}`);
+            const fileContent = await response.text();
+
+            const email = sessionStorage.getItem('email');
+            const url = "http://localhost:8080/api/getKeys";
+            const { data: res } = await axios.post(url, {email: email});
+
+            let privateKey = res.data.privateKey;
+    
+            const decrypted = await cryptographyHandler.decryptDocument(privateKey, fileContent);
+
+            const newXML = { formData: decrypted };  
+            const builder = new xml2js.Builder();
+            const xml = builder.buildObject(newXML);
+    
+            const blob = new Blob([xml], { type: 'application/xml' });
+    
+            saveAs(blob, 'xFir.xml');
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }
 
 export { ipfsHandler }
