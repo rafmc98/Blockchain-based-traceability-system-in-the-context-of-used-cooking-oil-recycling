@@ -1,4 +1,4 @@
-import '../TransactionResponse.css';
+import './TransactionResponse.css';
 
 const TransactionResponse = ({title, message, closeResponseBox}) => {
   

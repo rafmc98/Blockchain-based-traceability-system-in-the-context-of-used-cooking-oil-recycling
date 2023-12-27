@@ -3,13 +3,11 @@ import Web3 from 'web3';
 
 import './GetFullSequence.css'
 
-import GetPdf from '../GetPdf' 
-
-import firstContractABI from '../../contracts/FirstWIfCidStorageABI.json';
-import secondContractABI from '../../contracts/SecondWifCidStorageABI.json';
-import thirdContractABI from '../../contracts/ThirdRegenerationCidStorageABI.json'
+import firstContractABI from '../../contractsABI/FirstWIfCidStorageABI.json';
+import secondContractABI from '../../contractsABI/SecondWifCidStorageABI.json';
+import thirdContractABI from '../../contractsABI/ThirdRegenerationCidStorageABI.json'
 import { useTranslation } from 'react-i18next';
-import { ipfsHandler } from '../ipfsHandler';
+import { ipfsHandler } from '../IpfsHandler/ipfsHandler.js';
 
 const GetFullSequence = () => {
 
@@ -115,7 +113,6 @@ const GetFullSequence = () => {
             <td name="cid">
                 <a href={`https://ipfs.io/ipfs/${cid}`}>{cid}</a>
             </td>
-            <td><GetPdf cid={cid}/></td>
             <td>
                 <button onClick={() => ipfsHandler.getFileFromIpfs(cid)}>{t('getXml')}</button>
             </td>
@@ -135,7 +132,6 @@ const GetFullSequence = () => {
                         <tr>
                             <th>ID DOC</th>
                             <th>CID</th>
-                            <th></th>
                             <th></th>
                         </tr>
                     </thead>

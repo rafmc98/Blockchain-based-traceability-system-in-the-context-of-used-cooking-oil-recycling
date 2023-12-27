@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import Web3 from 'web3';
-import { ipfsHandler } from '../ipfsHandler';
+import { ipfsHandler } from '../IpfsHandler/ipfsHandler';
 
-import thirdContractABI from '../../contracts/ThirdRegenerationCidStorageABI.json';
+import thirdContractABI from '../../contractsABI/ThirdRegenerationCidStorageABI.json';
 
 
-import TransactionResponse from '../TransactionResponse';
+import TransactionResponse from '../TransactionResponse/TransactionResponse';
 
 class RegenerationOracle extends Component {
 
@@ -49,70 +49,62 @@ class RegenerationOracle extends Component {
   }
 
   async storeWifCid() {
-    if (this.state.fileToUpload !== undefined) {
 
-      const web3 = new Web3(window.ethereum);
-      
-      const contract = new web3.eth.Contract(this.state.thirdAbi, this.state.onChainAddress);
+    const web3 = new Web3(window.ethereum);
+    
+    const contract = new web3.eth.Contract(this.state.thirdAbi, this.state.onChainAddress);
 
-      const balanceResult = await this.checkBalance(web3, contract); 
-      if(balanceResult !== undefined) {
-        if (!balanceResult) {
-          this.setState({
-            title: this.props.t('transactionFailed'),
-            showResponse: this.props.t('insufficientBalance')
-          });
-          console.log('Insufficient balance to cover gas cost');
-          return
-        } else {
-          console.log('Sufficient balance to cover gas cost');
-        } 
-      } else return
-      
-      const result = await ipfsHandler.storeWif(this.state.fileToUpload);
-
-      const ipfsCid = result.ipfsCid;
-      const rfj = result.rfj;
-      
-      try {
-        const gasEstimate = await contract.methods
-          .addRegenerationCid(this.state.prevRfj, ipfsCid, rfj)
-          .estimateGas({from: this.state.account});
-        
-        const myData = contract.methods.addRegenerationCid(this.state.prevRfj, ipfsCid, rfj).encodeABI();
-        const recipient = this.state.onChainAddress;        
-
-        const transaction = await web3.eth.sendTransaction({
-          from: this.state.account,
-          to: recipient,
-          gas: gasEstimate,
-          data: myData,
-        });
-
-        console.log("Transaction Hash: " + transaction.transactionHash);
-        
-        this.setState({
-          title: this.props.t('transactionConfirmed'),
-          showResponse: this.props.t('RegenerationCidStored')
-        });
-
-        this.setState({
-          fileToUpload: null
-        })
-
-      } catch (error) {
-        console.log(error);
+    const balanceResult = await this.checkBalance(web3, contract); 
+    if(balanceResult !== undefined) {
+      if (!balanceResult) {
         this.setState({
           title: this.props.t('transactionFailed'),
-          showResponse: error.data.message
+          showResponse: this.props.t('insufficientBalance')
         });
-      }
-    } else {
-      this.setState({
-        title: this.props.t('missingFile'),
-        showResponse: this.props.t('fileErrorMessage')
+        console.log('Insufficient balance to cover gas cost');
+        return
+      } else {
+        console.log('Sufficient balance to cover gas cost');
+      } 
+    } else return
+    
+    const result = await ipfsHandler.storeWif(this.state.fileToUpload);
+
+    const ipfsCid = result.ipfsCid;
+    const rfj = result.rfj;
+    
+    try {
+  
+      let gasManual = 2000000;
+      
+      const myData = contract.methods.addRegenerationCid(this.state.prevRfj, ipfsCid, rfj).encodeABI();
+      const recipient = this.state.onChainAddress;        
+
+      const transaction = await web3.eth.sendTransaction({
+        from: this.state.account,
+        to: recipient,
+        gas: gasManual,
+        data: myData,
       });
-    }
+
+      console.log("Transaction Hash: " + transaction.transactionHash);
+      
+      this.setState({
+        title: this.props.t('transactionConfirmed'),
+        showResponse: this.props.t('RegenerationCidStored')
+      });
+
+      this.setState({
+        fileToUpload: null
+      })
+
+    } catch (error) {
+      console.log(error);
+      this.setState({
+        title: this.props.t('transactionFailed'),
+        showResponse: error.data.message
+      });
+    }  
   }
 
   async checkBalance(web3, contract) {

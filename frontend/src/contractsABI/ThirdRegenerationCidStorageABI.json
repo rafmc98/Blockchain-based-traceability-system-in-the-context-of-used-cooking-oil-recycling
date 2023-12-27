@@ -1,6 +1,48 @@
 [
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newAddress",
+				"type": "address"
+			}
+		],
+		"name": "addEnabledAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_secondDocId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_ipfsCid",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_docId",
+				"type": "string"
+			}
+		],
+		"name": "addRegenerationCid",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_previousContractAddress",
+				"type": "address"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -31,24 +73,27 @@
 		"type": "event"
 	},
 	{
+		"anonymous": false,
 		"inputs": [
 			{
-				"internalType": "string",
-				"name": "_prevRfj",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_ipfsCid",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_rfj",
-				"type": "string"
+				"indexed": true,
+				"internalType": "address",
+				"name": "newAddress",
+				"type": "address"
 			}
 		],
-		"name": "addWifCid",
+		"name": "CertificationNFTContractAddressSet",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newOwner",
+				"type": "address"
+			}
+		],
+		"name": "changeOwner",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -61,20 +106,7 @@
 				"type": "address"
 			}
 		],
-		"name": "addWriter",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_newOwner",
-				"type": "address"
-			}
-		],
-		"name": "changeOwner",
+		"name": "changePreviousAddress",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -99,6 +131,38 @@
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newAddress",
+				"type": "address"
+			}
+		],
+		"name": "PreviousContractAddressSet",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "RefundRequested",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -106,9 +170,45 @@
 				"type": "address"
 			}
 		],
-		"name": "removeWriter",
+		"name": "removeEnabledAddress",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newCertificationNFTContractAddress",
+				"type": "address"
+			}
+		],
+		"name": "setNFTMinterAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "DocIdMapping",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -119,7 +219,7 @@
 				"type": "uint256"
 			}
 		],
-		"name": "allowedWriters",
+		"name": "enabledAddresses",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -132,7 +232,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "getAllowedWriters",
+		"name": "getEnabledAddresses",
 		"outputs": [
 			{
 				"internalType": "address[]",
@@ -147,11 +247,11 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_prevRfj",
+				"name": "_prevDocId",
 				"type": "string"
 			}
 		],
-		"name": "getNextRfj",
+		"name": "getNextDocId",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -166,11 +266,11 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_rfj",
+				"name": "_docId",
 				"type": "string"
 			}
 		],
-		"name": "getWifInfo",
+		"name": "getRegenerationInfo",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -194,30 +294,11 @@
 				"type": "string"
 			}
 		],
-		"name": "RfjMapping",
+		"name": "RegenerationCidMapping",
 		"outputs": [
 			{
 				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"name": "WifCidMapping",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "prevRfj",
+				"name": "prevDocId",
 				"type": "string"
 			},
 			{

@@ -1,6 +1,5 @@
 import xml2js from 'xml2js';
 import forge from 'node-forge';
-import FileSaver from 'file-saver';
 
 class CryptographyHandler {
   constructor() {

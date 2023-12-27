@@ -26,7 +26,7 @@
   "wrongRfj": "Il codice RFJ inserito non corrisponde a nessun file memorizzato",
   "linkToWif" : "Collegamento al documento FIR",
   "prevRfj": "RFJ precedente: ",
-  "prevIdDocDescritpion": "Inserisci il codice del documento precedente se presente",
+  "prevIdDocDescritpion": "Inserisci il codice del documento precedente",
   "prevIdDoc": "Inserisci il codice del documento precedente",
   "setPrevRfjPlaceholder": "Id documento precedente",
   "getWifPlaceholder": "Inserisci il numero seriale di un documento",
@@ -48,5 +48,14 @@
   "previousLinked": "Documento precedente collegato: ",
   "firGeneratedTitle": "FIR generato",
   "getXml": "Scarica XML",
-  "getPdf": "Scarica PDF"
+  "getPdf": "Scarica PDF",
+  "nftOverview": "Overview NFT",
+  "validity": "Validità",
+  "getOTs": "Richiedi OT",
+  "OTCoinReceived": "OilTracker Tokens ricevuti",
+  "OTCoinOverview": "Bilancio OilTracker Token",
+  "OTExchangeRate": "Tasso di cambio OT Token",
+  "changeExchangeRateTitle": "Modifica il tasso di scambio",
+  "changeRatePlaceholder": "Inserisci il nuovo tasso di scambio",
+  "exchangeRateModified": "Il tasso di cambio è stato modificato"
 }

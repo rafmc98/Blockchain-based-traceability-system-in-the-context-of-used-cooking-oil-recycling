@@ -1,6 +1,12 @@
 [
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_previousContractAddress",
+				"type": "address"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
 	},
@@ -50,6 +56,38 @@
 		"type": "event"
 	},
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newAddress",
+				"type": "address"
+			}
+		],
+		"name": "PreviousContractAddressSet",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "RefundRequested",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -57,7 +95,7 @@
 				"type": "string"
 			}
 		],
-		"name": "IdDocMapping",
+		"name": "DocIdMapping",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -76,11 +114,11 @@
 				"type": "string"
 			}
 		],
-		"name": "RegenerationCidMapping",
+		"name": "WifCidMapping",
 		"outputs": [
 			{
 				"internalType": "string",
-				"name": "prevIdDoc",
+				"name": "prevDocId",
 				"type": "string"
 			},
 			{
@@ -95,8 +133,21 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_newAddress",
+				"type": "address"
+			}
+		],
+		"name": "addEnabledAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "string",
-				"name": "_prevIdDoc",
+				"name": "_prevDocId",
 				"type": "string"
 			},
 			{
@@ -110,41 +161,9 @@
 				"type": "string"
 			}
 		],
-		"name": "addRegenerationCid",
+		"name": "addWifCid",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_newAddress",
-				"type": "address"
-			}
-		],
-		"name": "addWriter",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "allowedWriters",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -161,8 +180,40 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_newAddress",
+				"type": "address"
+			}
+		],
+		"name": "changePreviousAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "enabledAddresses",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
-		"name": "getAllowedWriters",
+		"name": "getEnabledAddresses",
 		"outputs": [
 			{
 				"internalType": "address[]",
@@ -177,11 +228,11 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_prevIdDoc",
+				"name": "_prevDocId",
 				"type": "string"
 			}
 		],
-		"name": "getNextIdDoc",
+		"name": "getNextDocId",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -200,7 +251,7 @@
 				"type": "string"
 			}
 		],
-		"name": "getRegenerationInfo",
+		"name": "getWifInfo",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -224,9 +275,13 @@
 				"type": "address"
 			}
 		],
-		"name": "removeWriter",
+		"name": "removeEnabledAddress",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
 	}
 ]

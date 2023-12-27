@@ -817,7 +817,7 @@ class FirForm extends Component {
               <select
                 className="input-medium"
                 name="formData.DatiFormulario.DatiAccettazione.AccettazioneCompleta"
-                defaultValue={this.state.formData.DatiFormulario.DatiAccettazione.AccettazioneCompleta || 'A'}
+                value={this.state.formData.DatiFormulario.DatiAccettazione.AccettazioneCompleta || 'A'}
                 onChange={this.handleChange}
               >
                 <option value="" disabled>Accettazione Rifiuto</option>
@@ -926,7 +926,7 @@ class FirForm extends Component {
                 value={this.state.formData.DatiFormulario.CaratteristicheRifiuto.StatoFisico || ''}
                 onChange={this.handleChange}
               >
-                <option value="" disabled selected>Stato Fisico</option>
+                <option value='DEFAULT' disabled>Stato Fisico</option>
                 <option value="SP">Pulverulento</option>
                 <option value="SNP">Solido</option>
                 <option value="FP">Fangoso</option>
@@ -939,7 +939,7 @@ class FirForm extends Component {
                 value={this.state.formData.DatiFormulario.CaratteristicheRifiuto.ClassePericolo || ''}
                 onChange={this.handleChange}
               >
-                <option value="" disabled selected>Seleziona una classe di pericolo</option>
+                <option value="DEFAULT" disabled >Seleziona una classe di pericolo</option>
                 <option value="HP01">HP01</option>
                 <option value="HP02">HP02</option>
                 <option value="HP03">HP03</option>
@@ -995,7 +995,7 @@ class FirForm extends Component {
                 value={this.state.formData.DatiFormulario.DestinazioneRifiuto.OperazioneRecupero || ''}
                 onChange={this.handleChange}
               >
-                <option value="" disabled selected>Operazione Recupero</option>
+                <option value="DEFAULT" disabled >Operazione Recupero</option>
                 <option value="R1">R1</option>
                 <option value="R2">R2</option>
                 <option value="R3">R3</option>
@@ -1016,7 +1016,7 @@ class FirForm extends Component {
                 value={this.state.formData.DatiFormulario.DestinazioneRifiuto.OperazioneSmaltimento || ''}
                 onChange={this.handleChange}
               >
-                <option value="" disabled selected>Operazione Smaltimento</option>
+                <option value="DEFAULT" disabled >Operazione Smaltimento</option>
                 <option value="D1">D1</option>
                 <option value="D2">D2</option>
                 <option value="D3">D3</option>

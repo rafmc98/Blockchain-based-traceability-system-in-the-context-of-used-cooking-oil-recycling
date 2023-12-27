@@ -25,7 +25,7 @@
     "error": "Error",
     "wrongRfj": "The RFJ code entered does not correspond to any stored file",
     "linkToWif" : "Link to WIF document",
-    "prevIdDocDescritpion": "Enter the code from the previous document if it exists",
+    "prevIdDocDescritpion": "Enter the code from the previous document",
     "prevIdDoc": "Enter the code from the previous document",
     "prevRfj": "Previous Rfj: ",
     "setPrevRfjPlaceholder": "Previous document id",
@@ -48,5 +48,14 @@
     "previousLinked": "Previous linked document: ",
     "firGeneratedTitle": "WIF generated",
     "getXml": "Get XML",
-    "getPdf": "Get PDF"
+    "getPdf": "Get PDF",
+    "nftOverview": "NFT Overview",
+    "validity": "Validity",
+    "getOTs": "Get OTs",
+    "OTCoinReceived": "OilTracker Tokens received",
+    "OTCoinOverview": "OilTracker Token Balance",
+    "OTExchangeRate": "OT Token exchange rate",
+    "changeExchangeRateTitle": "Change exchange rate",
+    "changeRatePlaceholder": "Enter the new exchange rate",
+    "exchangeRateModified": "The exchange rate has been modified"
 }

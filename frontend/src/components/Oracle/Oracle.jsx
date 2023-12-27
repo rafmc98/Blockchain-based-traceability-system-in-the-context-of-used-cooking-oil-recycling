@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { useTranslation, withTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import Web3 from 'web3';
-import { ipfsHandler } from '../ipfsHandler';
+import { ipfsHandler } from '../IpfsHandler/ipfsHandler';
 
-import firstContractABI from '../../contracts/FirstWIfCidStorageABI.json';
-import secondContractABI from '../../contracts/SecondWifCidStorageABI.json';
+import firstContractABI from '../../contractsABI/FirstWIfCidStorageABI.json';
+import secondContractABI from '../../contractsABI/SecondWifCidStorageABI.json';
 
 import './Oracle.css';
 
-import TransactionResponse from '../TransactionResponse';
+import TransactionResponse from '../TransactionResponse/TransactionResponse';
 
 class Oracle extends Component {
 
@@ -31,7 +31,6 @@ class Oracle extends Component {
     // Serve per bindare le funzioni che fanno parte di questa classe
     this.storeWifCid = this.storeWifCid.bind(this);
     this.checkBalance = this.checkBalance.bind(this);
-    this.getWifCid = this.getWifCid.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
     this.closeResponseBox = this.closeResponseBox.bind(this);
   }
@@ -54,7 +53,7 @@ class Oracle extends Component {
   }
 
   async storeWifCid() {
-    if (this.state.fileToUpload !== undefined) {
+  
 
       const web3 = new Web3(window.ethereum);
       let contract = null;
@@ -63,6 +62,8 @@ class Oracle extends Component {
       } else {
         contract = new web3.eth.Contract(this.state.secondAbi, this.state.secondOnChainAddress);
       }
+
+      console.log(contract);
 
       const balanceResult = await this.checkBalance(web3, contract); 
       if(balanceResult !== undefined) {
@@ -84,59 +85,42 @@ class Oracle extends Component {
       const rfj = result.rfj;
       
       try {
-        let gasEstimate = null;
         let myData = null;
         let recipient = null;
+        let gasManual = 2000000;
+      
         if (!this.state.prevRfj) {
-          gasEstimate = await contract.methods
-            .addWif(ipfsCid, rfj)
-            .estimateGas({from: this.state.account});
-
-          myData = contract.methods.addWif(ipfsCid, rfj).encodeABI();
+          myData = contract.methods.addWifCid(ipfsCid, rfj).encodeABI();
           recipient = this.state.firstOnChainAddress;
-
         } else {
-
-          gasEstimate = await contract.methods
-            .addWifCid(this.state.prevRfj, ipfsCid, rfj)
-            .estimateGas({from: this.state.account});
-          
           myData = contract.methods.addWifCid(this.state.prevRfj, ipfsCid, rfj).encodeABI();
           recipient = this.state.secondOnChainAddress;
-
         }
-
+      
         const transaction = await web3.eth.sendTransaction({
           from: this.state.account,
           to: recipient,
-          gas: gasEstimate,
+          gas: gasManual,
           data: myData,
         });
-
+      
         console.log("Transaction Hash: " + transaction.transactionHash);
-        
+      
         this.setState({
           title: this.props.t('transactionConfirmed'),
-          showResponse: this.props.t('wifCidStored')
+          showResponse: this.props.t('wifCidStored'),
         });
-
+      
         this.setState({
-          fileToUpload: null
-        })
-
+          fileToUpload: null,
+        });
       } catch (error) {
         console.log(error);
         this.setState({
           title: this.props.t('transactionFailed'),
-          showResponse: error.data.message
+          showResponse: error.data.message,
         });
       }
-    } else {
-      this.setState({
-        title: this.props.t('missingFile'),
-        showResponse: this.props.t('fileErrorMessage')
-      });
-    }
   }
 
   async checkBalance(web3, contract) {
@@ -158,7 +142,7 @@ class Oracle extends Component {
 
       // check per quale contratto chiamare
       if (!this.state.prevRfj) {
-        gasEstimate = await contract.methods.addWif(placeholderCid, placeholderRfj).estimateGas({
+        gasEstimate = await contract.methods.addWifCid(placeholderCid, placeholderRfj).estimateGas({
           from: this.state.account
         });
       } else {
@@ -179,45 +163,6 @@ class Oracle extends Component {
         showResponse: error.data.message
       });
     }
-  }
-
-  // Not used anymore
-  async getWifCid(rfj) {
-    try {
-      if (this.state.account) {
-        const web3 = new Web3(window.ethereum);
-
-        const contract = new web3.eth.Contract(this.state.abi, this.state.onChainAddress);
-
-        const result = await contract.methods.getWifInfo(rfj).call();
-
-        if (!result) {
-          this.setState({
-            title: this.props.t('error'),
-            showResponse: this.props.t('wrongRfj')
-          });
-        } else if (typeof result === "object") {
-            this.setState({
-              title: this.props.t('linkToWif'),
-              showResponse: `https://ipfs.io/ipfs/${result[1]}` + 
-              this.props.t('prevRfj') + `${result[0]}`
-            });
-          } else {
-            console.log("Wif Cid: " + result);
-            this.setState({
-              title: this.props.t('linkToWif'),
-              showResponse: `https://ipfs.io/ipfs/${result}`
-            });
-          }
-      }  else {
-        console.log("Please connect your account");
-      }
-    } catch (error) {
-      this.setState({
-        title: this.props.t("transactionFailed"),
-        showResponse: error.data.message
-      });
-    }  
   }
 
   async submitHandler(event) {

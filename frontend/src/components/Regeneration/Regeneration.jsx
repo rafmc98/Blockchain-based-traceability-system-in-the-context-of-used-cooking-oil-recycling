@@ -4,10 +4,12 @@ import './Regeneration.css';
 
 import ConnectWalletDisclaimer from '../ConnectWalletDisclaimer/ConnectWalletDisclaimer';
 import UploadFile from '../UploadFile/UploadFile';
+import RewardSystem from '../RewardSystem/RewardSystem';
 import RegenerationOracle from '../RegenerationOracle/RegenerationOracle';
 import RegenerationDocForm from '../RegenerationDocForm/RegenerationDocForm';
 
-const Regenerarion = () => {
+
+const Regeneration = () => {
    
     const account = sessionStorage.getItem('account');
     const { t } = useTranslation();
@@ -31,6 +33,8 @@ const Regenerarion = () => {
             <ConnectWalletDisclaimer />
         ) : (
             <div className="regeneration-container">
+                <RewardSystem account={account}/>
+
                 <span>{t('prevIdDoc')}</span>
                 <input className="prevIdDocument" type='text' placeholder={t('setPrevRfjPlaceholder')} value={prevRfj} onChange={handleInputChange}/>
                 <span className='sectionTitle'>{t('upload-transport')}</span>
@@ -57,4 +61,4 @@ const Regenerarion = () => {
     );
   };
   
-  export default Regenerarion;
+  export default Regeneration;

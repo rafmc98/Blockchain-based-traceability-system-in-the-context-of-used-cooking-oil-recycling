@@ -1,5 +1,5 @@
 import { create } from "ipfs-http-client";
-import { cryptographyHandler } from "./CryptographyHandler";
+import { cryptographyHandler } from "../CryptographyHandler/CryptographyHandler";
 import xml2js from 'xml2js';
 import axios from "axios";
 import { saveAs } from 'file-saver';

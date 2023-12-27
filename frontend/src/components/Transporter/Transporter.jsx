@@ -8,35 +8,19 @@ import Oracle from '../Oracle/Oracle';
 import FirForm from '../FirForm/FirForm';
 import ConnectWalletDisclaimer from '../ConnectWalletDisclaimer/ConnectWalletDisclaimer';
 
-import firstContractABI from '../../contracts/FirstWIfCidStorageABI.json';
-import secondContractABI from '../../contracts/SecondWifCidStorageABI.json';
-
 const Transporter = () => {
 
   const { t } = useTranslation();
   const account = sessionStorage.getItem('account');
   
-  const [firstWif, setFirstWif] = useState(null);
-  const [secondWif, setSecondWif] = useState(null); 
 
   const [document, setDocument] = useState(null);
   const [prevRfj, setPrevRfj] = useState('');
-
-
-  const updateFirstWif = (newFileToUpload) => {
-    setFirstWif(newFileToUpload);
-    console.log("First wif uploaded");
-  }
 
   const updateDocument = (newFileToUpload) => {
     setDocument(newFileToUpload);
     console.log(process.env.REACT_APP_ENCRYPTION_PUBLIC_KEY)
     console.log("Document uploaded");
-  }
-
-  const updateSecondWif = (newFileToUpload) => {
-    setSecondWif(newFileToUpload);
-    console.log("First wif uploaded");
   }
 
   const handleInputChange = (event) => {
@@ -51,20 +35,6 @@ const Transporter = () => {
         
           <div className='transporter-container'>
             <div className='interactionContainer'>
-
-              {/*<div className="interactionBox">
-                <span className='sectionTitle'>{t('uploadFirst')}</span>
-                <div className='uploadBox'>
-                  <UploadFile updateFileToUpload={updateFirstWif}/>
-                </div>
-                <Oracle 
-                  contractABI={firstContractABI} 
-                  onChainAddress={process.env.REACT_APP_FIRST_CONTRACT_ADDRESS}
-                  account={account}
-                  networkRPC={"https://polygon-mumbai.infura.io/v3/" + process.env.REACT_APP_POLYGON_API_KEY}
-                  fileToUpload={firstWif}
-                />
-              </div>*/}
 
               <div className="interactionBox">
                 <span>{t('prevIdDocDescritpion')}</span>
