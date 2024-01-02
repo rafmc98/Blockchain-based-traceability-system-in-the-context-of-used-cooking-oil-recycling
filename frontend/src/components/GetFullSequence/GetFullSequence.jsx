@@ -49,9 +49,7 @@ const GetFullSequence = () => {
                     tempCidSequence[1] = result[1]
                     tempRfjSequence[1] = secondRfj
                 }
-                console.log("errore qui");
                 thirdIdDoc = await thirdContract.methods.getNextIdDoc(secondRfj).call()
-                console.log("errore")
                 if (thirdIdDoc) {
                     result = await thirdContract.methods.getRegenerationInfo(thirdIdDoc).call()
                     tempCidSequence[2] = result[1]
@@ -85,7 +83,7 @@ const GetFullSequence = () => {
                 tempRfjSequence[0] = firstRfj
                 break;
             default:
-                console.log("Il codice Rfj non esiste");
+                console.log("The document Id doesn't exist");
         }
         console.log(tempCidSequence)
         console.log(tempRfjSequence)
