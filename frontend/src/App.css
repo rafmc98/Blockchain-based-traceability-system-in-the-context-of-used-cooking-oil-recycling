@@ -11,6 +11,7 @@ button, input, select{
     outline: none;
     font-family:  'Comfortaa', sans-serif;
     padding: 0 15px;
+    font-size: 15px;
     background-color: white;
 }
 
